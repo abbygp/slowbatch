@@ -6,10 +6,6 @@
   <title>The Monthly Recipe Card Mail Club</title>
   <meta name="description" content="A sensory baking ritual, delivered straight to your mailbox.">
 
-  <!-- Site Icon -->
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="favicon.svg">
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,27 +72,16 @@
       height: 100%;
     }
 
-    .email-input:focus {
-      outline: none;
-      border-color: #431407;
-      box-shadow: 0 0 0 3px rgba(67, 20, 7, 0.12);
+    .substack-embed {
+      background-color: #efeae7;
     }
 
-    .join-btn {
-      transition: background-color 0.25s ease, transform 0.15s ease;
-    }
-
-    .join-btn:hover {
-      background-color: #321003;
-    }
-
-    .join-btn:active {
-      transform: scale(0.98);
-    }
-
-    .join-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .substack-embed iframe {
+      display: block;
+      width: 100%;
+      min-height: 150px;
+      border: 0;
+      background: transparent;
     }
 
     .brand-logo {
@@ -220,38 +205,22 @@
       </p>
     </header>
 
-    <!-- 2. Email Sign-Up -->
+    <!-- 2. Email Sign-Up (Substack embed) -->
     <section class="w-full mb-14 sm:mb-16" aria-labelledby="signup-heading">
       <h2 id="signup-heading" class="sr-only">Join the Club</h2>
 
-      <form id="signup-form" class="w-full" novalidate>
-        <div class="flex flex-col gap-3">
-          <label for="email" class="sr-only">Email address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="your@email.com"
-            class="email-input w-full px-4 py-3.5 bg-transparent border border-charcoal/25 rounded-sm text-charcoal placeholder:text-charcoal/40 text-sm tracking-wide"
-          >
-          <button
-            type="submit"
-            id="submit-btn"
-            class="join-btn w-full py-3.5 bg-accent text-cream text-sm font-medium tracking-widest uppercase rounded-sm"
-          >
-            Join the Club
-          </button>
-        </div>
+      <div class="substack-embed w-full overflow-hidden rounded-sm border border-charcoal/20">
+        <iframe
+          src="https://slowbatch.substack.com/embed"
+          height="320"
+          title="Subscribe to slowbatch on Substack"
+          scrolling="no"
+        ></iframe>
+      </div>
 
-        <p class="mt-4 text-xs text-charcoal/55 leading-relaxed text-center">
-          Receive monthly updates, recipe previews, and studio notes.
-        </p>
-
-        <!-- Success / error messages -->
-        <p id="form-message" class="mt-4 text-xs text-center hidden" role="status" aria-live="polite"></p>
-      </form>
+      <p class="mt-4 text-xs text-charcoal/55 leading-relaxed text-center">
+        Receive monthly updates, recipe previews, and studio notes.
+      </p>
     </section>
 
     <!-- Divider -->
@@ -323,74 +292,6 @@
   </footer>
 
   <script>
-    /**
-     * Email sign-up handler — placeholder for your newsletter provider.
-     *
-     * Replace `submitToNewsletterProvider` with your API integration
-     * (e.g. Mailchimp, ConvertKit, Buttondown, Beehiiv, etc.)
-     */
-    async function submitToNewsletterProvider(email) {
-      // TODO: Connect to your email newsletter provider API here.
-      //
-      // Example structure:
-      // const response = await fetch('https://api.yourprovider.com/subscribe', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email }),
-      // });
-      // if (!response.ok) throw new Error('Subscription failed');
-      // return response.json();
-
-      // Simulated delay for demo purposes — remove when wiring up your API.
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      console.log('Newsletter sign-up:', email);
-      return { success: true };
-    }
-
-    const form = document.getElementById('signup-form');
-    const emailInput = document.getElementById('email');
-    const submitBtn = document.getElementById('submit-btn');
-    const formMessage = document.getElementById('form-message');
-
-    function showMessage(text, type) {
-      formMessage.textContent = text;
-      formMessage.classList.remove('hidden', 'text-accent', 'text-red-600/70');
-      formMessage.classList.add(type === 'success' ? 'text-accent' : 'text-red-600/70');
-    }
-
-    function hideMessage() {
-      formMessage.classList.add('hidden');
-      formMessage.textContent = '';
-    }
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      hideMessage();
-
-      const email = emailInput.value.trim();
-
-      if (!email || !emailInput.checkValidity()) {
-        showMessage('Please enter a valid email address.', 'error');
-        emailInput.focus();
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Joining…';
-
-      try {
-        await submitToNewsletterProvider(email);
-        showMessage('Welcome to the club — check your inbox soon.', 'success');
-        form.reset();
-      } catch (error) {
-        console.error('Sign-up error:', error);
-        showMessage('Something went wrong. Please try again.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Join the Club';
-      }
-    });
-
     // Nav dropdowns: tap to toggle on touch devices
     document.querySelectorAll('.nav-item').forEach((item) => {
       const trigger = item.querySelector('.nav-trigger');
