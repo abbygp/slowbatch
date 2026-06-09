@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Monthly Recipe Card Mail Club</title>
+  <title>Slowbatch Studio</title>
   <meta name="description" content="A sensory baking ritual, delivered straight to your mailbox.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -26,6 +26,7 @@
           },
           fontFamily: {
             serif: ['Lora', 'Georgia', 'serif'],
+            script: ['"Cormorant Garamond"', 'Georgia', 'serif'],
             sans: ['Lato', 'system-ui', 'sans-serif'],
           },
           maxWidth: {
@@ -197,12 +198,9 @@
 
     <!-- 1. Brand Header -->
     <header class="text-center mb-12 sm:mb-16 w-full">
-      <h1 class="font-serif text-2xl sm:text-[1.75rem] leading-snug tracking-wide font-medium text-charcoal mb-4">
-        THE MONTHLY RECIPE CARD MAIL CLUB
-      </h1>
-      <p class="font-sans text-sm sm:text-base text-charcoal/75 leading-relaxed max-w-xs mx-auto">
+      <h1 class="font-script italic text-2xl sm:text-[2rem] leading-snug text-charcoal/90 font-normal max-w-sm mx-auto">
         A sensory baking ritual, delivered straight to your mailbox.
-      </p>
+      </h1>
     </header>
 
     <!-- 2. Email Sign-Up (Substack embed) -->
@@ -228,23 +226,6 @@
 
     <!-- 3. Cozy Link Hub -->
     <nav class="w-full flex flex-col gap-3 mb-16 sm:mb-20" aria-label="Links">
-      <a
-        href="https://slowbatch.substack.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn flex items-center gap-4 w-full px-5 py-4 border border-charcoal/20 rounded-sm hover:bg-accent-light hover:border-charcoal/30"
-      >
-        <span class="link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
-          </svg>
-        </span>
-        <span class="text-left leading-snug">
-          <span class="block text-sm text-charcoal/85">Subscribe on Substack</span>
-          <span class="block text-xs text-charcoal/50 mt-0.5">Physical Mail &amp; Digital Recipes</span>
-        </span>
-      </a>
-
       <a
         href="https://www.etsy.com/shop/bycraftigail"
         target="_blank"
@@ -286,7 +267,7 @@
   <footer class="w-full max-w-content mx-auto px-6 pb-10 text-center">
     <p class="text-[11px] text-charcoal/40 tracking-wide flex items-center justify-center gap-1.5">
       <span aria-hidden="true">✦</span>
-      <span>&copy; 2026 The Monthly Recipe Card Mail Club</span>
+      <span>&copy; 2026 Slowbatch Studio</span>
       <span aria-hidden="true">✦</span>
     </p>
   </footer>
