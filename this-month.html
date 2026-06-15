@@ -43,43 +43,9 @@
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     .brand-logo { letter-spacing: 0.22em; }
     .top-nav { border-bottom: 1px solid rgba(44, 42, 41, 0.1); }
-    .nav-item { position: relative; }
-    .nav-trigger { transition: color 0.2s ease; }
-    .nav-trigger:hover, .nav-item.is-open .nav-trigger { color: rgba(44, 42, 41, 0.55); }
+    .nav-link { transition: color 0.2s ease; }
+    .nav-link:hover { color: rgba(44, 42, 41, 0.55); }
     .nav-link.is-active { color: rgba(44, 42, 41, 0.55); }
-    .nav-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      left: 50%;
-      transform: translateX(-50%) translateY(4px);
-      min-width: 15rem;
-      max-width: 18rem;
-      padding: 1rem 1.125rem;
-      background-color: #efeae7;
-      border: 1px solid rgba(44, 42, 41, 0.15);
-      border-radius: 2px;
-      box-shadow: 0 8px 24px rgba(44, 42, 41, 0.06);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-      z-index: 50;
-    }
-    @media (hover: hover) {
-      .nav-item:hover .nav-dropdown,
-      .nav-item:focus-within .nav-dropdown {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-    .nav-item.is-open .nav-dropdown {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
   </style>
 </head>
 <body class="bg-cream text-charcoal font-sans font-light min-h-screen flex flex-col">
@@ -91,52 +57,18 @@
       </a>
 
       <ul class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6">
-        <li class="nav-item">
-          <button type="button" class="nav-trigger text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-expanded="false" aria-haspopup="true">
-            What you get
-          </button>
-          <div class="nav-dropdown text-left" role="region" aria-label="What you get">
-            <ul class="text-xs text-charcoal/75 leading-relaxed space-y-2">
-              <li>🍰 Physical 4x6 Cardstock Recipe Card</li>
-              <li>💌 Journal/Aftertaste Prompt</li>
-              <li>🫖 Individual Tea Bag</li>
-              <li>🌷 Scented Paper Charm</li>
-              <li>✨ Hand-Picked Sticker</li>
-            </ul>
-          </div>
+        <li>
+          <a href="index.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
+            Home
+          </a>
         </li>
-
-        <li class="nav-item">
-          <button type="button" class="nav-trigger text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-expanded="false" aria-haspopup="true">
-            What you pay
-          </button>
-          <div class="nav-dropdown text-left" role="region" aria-label="What you pay">
-            <p class="text-xs text-charcoal/75 leading-relaxed">
-              <strong class="font-medium text-charcoal/85">$8/month</strong> on Substack, or <strong class="font-medium text-charcoal/85">$100/year</strong> for an extra blank recipe card and a handwritten thank-you note. All subscriptions are managed on
-              <a href="https://slowbatch.substack.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-charcoal">Substack</a>.
-            </p>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <button type="button" class="nav-trigger text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-expanded="false" aria-haspopup="true">
-            When to subscribe
-          </button>
-          <div class="nav-dropdown text-left" role="region" aria-label="When to subscribe">
-            <p class="text-xs text-charcoal/75 leading-relaxed">
-              Subscribe by the <strong class="font-medium text-charcoal/85">23rd of each month</strong> to receive that month's card in the mail.
-            </p>
-          </div>
-        </li>
-
         <li>
           <a href="this-month.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-current="page">
             This month
           </a>
         </li>
-
         <li>
-          <a href="contact.html" class="nav-trigger text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80 hover:text-charcoal/55 transition-colors">
+          <a href="contact.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
             Contact
           </a>
         </li>
@@ -175,8 +107,8 @@
 
       <ul class="text-left text-sm text-charcoal/75 leading-relaxed space-y-2.5 mb-8 max-w-xs mx-auto">
         <li class="flex items-start gap-2.5">
-          <span class="text-charcoal/25 shrink-0 w-4 text-center" aria-hidden="true">○</span>
-          <span class="text-charcoal/55">🍰 Recipe Cards Printed</span>
+          <span class="text-accent shrink-0 w-4 text-center" aria-hidden="true">✓</span>
+          <span>🍰 Recipe Cards Printed</span>
         </li>
         <li class="flex items-start gap-2.5">
           <span class="text-charcoal/25 shrink-0 w-4 text-center" aria-hidden="true">○</span>
@@ -236,40 +168,6 @@
       <span aria-hidden="true">✦</span>
     </p>
   </footer>
-
-  <script>
-    document.querySelectorAll('.nav-item').forEach((item) => {
-      const trigger = item.querySelector('.nav-trigger');
-      if (!trigger || trigger.tagName !== 'BUTTON') return;
-
-      trigger.addEventListener('click', (event) => {
-        if (window.matchMedia('(hover: hover)').matches) return;
-
-        event.preventDefault();
-        const isOpen = item.classList.contains('is-open');
-
-        document.querySelectorAll('.nav-item.is-open').forEach((openItem) => {
-          openItem.classList.remove('is-open');
-          openItem.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
-        });
-
-        if (!isOpen) {
-          item.classList.add('is-open');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!event.target.closest('.nav-item')) {
-        document.querySelectorAll('.nav-item.is-open').forEach((item) => {
-          item.classList.remove('is-open');
-          const trigger = item.querySelector('.nav-trigger');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        });
-      }
-    });
-  </script>
 
 </body>
 </html>
