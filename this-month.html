@@ -8,10 +8,9 @@
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -24,6 +23,7 @@
             accent: '#431407',
             'accent-dark': '#321003',
             'accent-light': '#e5dcd6',
+            'substack-brown': '#654a42',
           },
           fontFamily: {
             serif: ['Lora', 'Georgia', 'serif'],
@@ -40,35 +40,123 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    .brand-logo { letter-spacing: 0.22em; }
-    .top-nav { border-bottom: 1px solid rgba(44, 42, 41, 0.1); }
-    .nav-link { transition: color 0.2s ease; }
-    .nav-link:hover { color: rgba(44, 42, 41, 0.55); }
-    .nav-link.is-active { color: rgba(44, 42, 41, 0.55); }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-weight: 400;
+      color: #2c2a29;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #efeae7;
+      border-bottom: 1px solid rgba(44, 42, 41, 0.1);
+      box-shadow: 0 1px 0 rgba(239, 234, 231, 1);
+      isolation: isolate;
+    }
+
+    .top-nav-inner {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      gap: 0.625rem;
+    }
+
+    .brand-logo {
+      letter-spacing: 0.22em;
+      font-weight: 500;
+      color: #2c2a29;
+    }
+
+    .nav-link {
+      transition: color 0.2s ease;
+      font-weight: 500;
+      color: rgba(44, 42, 41, 0.85);
+    }
+
+    .nav-link:hover {
+      color: #431407;
+    }
+
+    .nav-link.is-active {
+      color: #431407;
+    }
+
+    .page-main {
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .page-title {
+      margin-bottom: 2rem;
+    }
+
+    .status-badge {
+      background-color: #654a42;
+      font-weight: 500;
+    }
+
+    .checklist {
+      font-weight: 500;
+      color: #2c2a29;
+    }
+
+    .checklist-item--done {
+      opacity: 1;
+    }
+
+    .checklist-item--pending {
+      opacity: 0.65;
+    }
+
+    .checklist-mark {
+      color: #654a42;
+    }
+
+    .logistics dt {
+      font-weight: 400;
+      color: rgba(44, 42, 41, 0.6);
+    }
+
+    .logistics dd {
+      font-weight: 500;
+      color: #2c2a29;
+    }
+
+    .page-note {
+      font-weight: 400;
+      color: rgba(44, 42, 41, 0.65);
+    }
+
+    .site-footer {
+      font-weight: 400;
+      color: rgba(44, 42, 41, 0.55);
+    }
   </style>
 </head>
-<body class="bg-cream text-charcoal font-sans font-light min-h-screen flex flex-col">
+<body class="bg-cream text-charcoal font-sans min-h-screen flex flex-col">
 
-  <nav class="top-nav w-full bg-cream sticky top-0 z-40" aria-label="Main navigation">
-    <div class="w-full max-w-content mx-auto px-6 py-4 flex flex-col items-center gap-4">
-      <a href="index.html" class="brand-logo font-serif text-base sm:text-lg text-charcoal/90 font-medium lowercase shrink-0">
+  <nav class="top-nav w-full" aria-label="Main navigation">
+    <div class="top-nav-inner w-full max-w-content mx-auto px-6 flex flex-col items-center">
+      <a href="index.html" class="brand-logo font-serif text-base sm:text-lg lowercase shrink-0">
         slowbatch
       </a>
 
       <ul class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6">
         <li>
-          <a href="index.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
+          <a href="index.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
             Home
           </a>
         </li>
         <li>
-          <a href="this-month.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-current="page">
+          <a href="this-month.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase" aria-current="page">
             This month
           </a>
         </li>
         <li>
-          <a href="contact.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
+          <a href="contact.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
             Contact
           </a>
         </li>
@@ -76,10 +164,10 @@
     </div>
   </nav>
 
-  <main class="flex-1 w-full max-w-content mx-auto px-6 py-14 sm:py-20 flex flex-col items-center">
+  <main class="page-main flex-1 w-full max-w-content mx-auto px-6 flex flex-col items-center">
 
-    <header class="text-center mb-10 sm:mb-12 w-full">
-      <h1 class="font-script italic text-2xl sm:text-[2rem] leading-snug text-charcoal/90 font-normal">
+    <header class="page-title text-center w-full">
+      <h1 class="font-script italic text-2xl sm:text-[2rem] leading-snug text-charcoal font-normal">
         This month
       </h1>
     </header>
@@ -93,76 +181,76 @@
     -->
     <section class="w-full border border-charcoal/20 rounded-sm p-6 sm:p-8 text-center" aria-labelledby="month-status">
 
-      <p class="text-[11px] tracking-[0.2em] uppercase text-charcoal/50 mb-4">
+      <p class="text-[11px] tracking-[0.2em] uppercase text-charcoal/50 mb-4 font-medium">
         June 2026
       </p>
 
-      <p id="month-status" class="inline-block px-4 py-1.5 mb-6 text-xs tracking-widest uppercase bg-accent text-cream rounded-sm">
+      <p id="month-status" class="status-badge inline-block px-4 py-1.5 mb-6 text-xs tracking-widest uppercase text-cream rounded-sm">
         Now accepting subscriptions
       </p>
 
-      <h2 class="font-serif text-lg text-charcoal/90 font-medium mb-5">
+      <h2 class="font-serif text-lg text-charcoal font-medium mb-5">
         Lemon Shortbread
       </h2>
 
-      <ul class="text-left text-sm text-charcoal/75 leading-relaxed space-y-2.5 mb-8 max-w-xs mx-auto">
-        <li class="flex items-start gap-2.5">
-          <span class="text-accent shrink-0 w-4 text-center" aria-hidden="true">✓</span>
+      <ul class="checklist text-left text-sm leading-relaxed space-y-2.5 mb-8 max-w-xs mx-auto">
+        <li class="checklist-item checklist-item--done flex items-start gap-2.5">
+          <span class="checklist-mark shrink-0 w-4 text-center" aria-hidden="true">✓</span>
           <span>🍰 Recipe Cards Printed</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-accent shrink-0 w-4 text-center" aria-hidden="true">✓</span>
+        <li class="checklist-item checklist-item--done flex items-start gap-2.5">
+          <span class="checklist-mark shrink-0 w-4 text-center" aria-hidden="true">✓</span>
           <span>💌 Journal Prompts Written</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-accent shrink-0 w-4 text-center" aria-hidden="true">✓</span>
+        <li class="checklist-item checklist-item--done flex items-start gap-2.5">
+          <span class="checklist-mark shrink-0 w-4 text-center" aria-hidden="true">✓</span>
           <span>🫖 June Tea Bags Picked</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-charcoal/25 shrink-0 w-4 text-center" aria-hidden="true">○</span>
-          <span class="text-charcoal/55">🌷 Scented Paper Charm Crafted</span>
+        <li class="checklist-item checklist-item--pending flex items-start gap-2.5">
+          <span class="shrink-0 w-4 text-center text-charcoal/40" aria-hidden="true">○</span>
+          <span>🌷 Scented Paper Charm Crafted</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-accent shrink-0 w-4 text-center" aria-hidden="true">✓</span>
+        <li class="checklist-item checklist-item--done flex items-start gap-2.5">
+          <span class="checklist-mark shrink-0 w-4 text-center" aria-hidden="true">✓</span>
           <span>✨ June Stickers Picked</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-charcoal/25 shrink-0 w-4 text-center" aria-hidden="true">○</span>
-          <span class="text-charcoal/55">✉️ Envelopes Packed</span>
+        <li class="checklist-item checklist-item--pending flex items-start gap-2.5">
+          <span class="shrink-0 w-4 text-center text-charcoal/40" aria-hidden="true">○</span>
+          <span>✉️ Envelopes Packed</span>
         </li>
-        <li class="flex items-start gap-2.5">
-          <span class="text-charcoal/25 shrink-0 w-4 text-center" aria-hidden="true">○</span>
-          <span class="text-charcoal/55">📬 Mail Sent</span>
+        <li class="checklist-item checklist-item--pending flex items-start gap-2.5">
+          <span class="shrink-0 w-4 text-center text-charcoal/40" aria-hidden="true">○</span>
+          <span>📬 Mail Sent</span>
         </li>
       </ul>
 
-      <dl class="text-left space-y-4 border-t border-charcoal/10 pt-6">
-        <div class="flex justify-between gap-4 text-sm">
-          <dt class="text-charcoal/50">Subscribe by</dt>
-          <dd class="text-charcoal/85 text-right">June 23</dd>
+      <dl class="logistics text-left space-y-4 border-t border-charcoal/10 pt-6 text-sm">
+        <div class="flex justify-between gap-4">
+          <dt>Subscribe by</dt>
+          <dd class="text-right">June 23</dd>
         </div>
-        <div class="flex justify-between gap-4 text-sm">
-          <dt class="text-charcoal/50">Cards ship</dt>
-          <dd class="text-charcoal/85 text-right">Late June</dd>
+        <div class="flex justify-between gap-4">
+          <dt>Cards ship</dt>
+          <dd class="text-right">Late June</dd>
         </div>
-        <div class="flex justify-between gap-4 text-sm">
-          <dt class="text-charcoal/50">Mail status</dt>
-          <dd class="text-charcoal/85 text-right">Open</dd>
+        <div class="flex justify-between gap-4">
+          <dt>Mail status</dt>
+          <dd class="text-right">Open</dd>
         </div>
       </dl>
 
     </section>
 
-    <p class="mt-8 text-xs text-charcoal/45 text-center leading-relaxed max-w-xs">
+    <p class="page-note mt-8 text-xs text-center leading-relaxed max-w-xs">
       Subscribe on the
-      <a href="index.html" class="underline underline-offset-2 hover:text-charcoal/70">home page</a>
+      <a href="index.html" class="underline underline-offset-2 hover:text-charcoal">home page</a>
       before the 23rd to receive this month's card.
     </p>
 
   </main>
 
-  <footer class="w-full max-w-content mx-auto px-6 pb-10 text-center">
-    <p class="text-[11px] text-charcoal/40 tracking-wide flex items-center justify-center gap-1.5">
+  <footer class="w-full max-w-content mx-auto px-6 pb-8 text-center">
+    <p class="site-footer text-[11px] tracking-wide flex items-center justify-center gap-1.5">
       <span aria-hidden="true">✦</span>
       <span>&copy; 2026 Slowbatch Studio</span>
       <span aria-hidden="true">✦</span>

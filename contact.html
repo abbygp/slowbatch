@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -45,36 +45,88 @@
     body {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      font-weight: 400;
+      color: #2c2a29;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #efeae7;
+      border-bottom: 1px solid rgba(44, 42, 41, 0.1);
+      box-shadow: 0 1px 0 rgba(239, 234, 231, 1);
+      isolation: isolate;
+    }
+
+    .top-nav-inner {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      gap: 0.625rem;
     }
 
     .brand-logo {
       letter-spacing: 0.22em;
-    }
-
-    .top-nav {
-      border-bottom: 1px solid rgba(44, 42, 41, 0.1);
+      font-weight: 500;
+      color: #2c2a29;
     }
 
     .nav-link {
       transition: color 0.2s ease;
+      font-weight: 500;
+      color: rgba(44, 42, 41, 0.85);
     }
 
     .nav-link:hover {
-      color: rgba(44, 42, 41, 0.55);
+      color: #431407;
     }
 
     .nav-link.is-active {
-      color: rgba(44, 42, 41, 0.55);
+      color: #431407;
+    }
+
+    .page-main {
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .page-title {
+      margin-bottom: 2rem;
+    }
+
+    .page-title p {
+      font-weight: 400;
+      color: rgba(44, 42, 41, 0.72);
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: rgba(44, 42, 41, 0.65);
+    }
+
+    .form-input,
+    .form-textarea {
+      border: 1px solid rgba(67, 20, 7, 0.22);
+      font-weight: 400;
+      color: #2c2a29;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(44, 42, 41, 0.4);
     }
 
     .form-input:focus,
     .form-textarea:focus {
       outline: none;
       border-color: #431407;
-      box-shadow: 0 0 0 3px rgba(67, 20, 7, 0.12);
+      box-shadow: 0 0 0 3px rgba(67, 20, 7, 0.1);
     }
 
     .submit-btn {
+      font-weight: 500;
+      letter-spacing: 0.01em;
       transition: background-color 0.25s ease, transform 0.15s ease;
     }
 
@@ -90,30 +142,38 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+
+    .contact-direct {
+      margin-top: 2.5rem;
+    }
+
+    .site-footer {
+      font-weight: 400;
+      color: rgba(44, 42, 41, 0.55);
+    }
   </style>
 </head>
-<body class="bg-cream text-charcoal font-sans font-light min-h-screen flex flex-col">
+<body class="bg-cream text-charcoal font-sans min-h-screen flex flex-col">
 
-  <!-- Top Menu Bar -->
-  <nav class="top-nav w-full bg-cream sticky top-0 z-40" aria-label="Main navigation">
-    <div class="w-full max-w-content mx-auto px-6 py-4 flex flex-col items-center gap-4">
-      <a href="index.html" class="brand-logo font-serif text-base sm:text-lg text-charcoal/90 font-medium lowercase shrink-0">
+  <nav class="top-nav w-full" aria-label="Main navigation">
+    <div class="top-nav-inner w-full max-w-content mx-auto px-6 flex flex-col items-center">
+      <a href="index.html" class="brand-logo font-serif text-base sm:text-lg lowercase shrink-0">
         slowbatch
       </a>
 
       <ul class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6">
         <li>
-          <a href="index.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
+          <a href="index.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
             Home
           </a>
         </li>
         <li>
-          <a href="this-month.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80">
+          <a href="this-month.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
             This month
           </a>
         </li>
         <li>
-          <a href="contact.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase text-charcoal/80" aria-current="page">
+          <a href="contact.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase" aria-current="page">
             Contact
           </a>
         </li>
@@ -121,35 +181,35 @@
     </div>
   </nav>
 
-  <main class="flex-1 w-full max-w-content mx-auto px-6 py-14 sm:py-20 flex flex-col items-center">
+  <main class="page-main flex-1 w-full max-w-content mx-auto px-6 flex flex-col items-center">
 
-    <header class="text-center mb-10 sm:mb-12 w-full">
-      <h1 class="font-script italic text-2xl sm:text-[2rem] leading-snug text-charcoal/90 font-normal max-w-sm mx-auto mb-4">
+    <header class="page-title text-center w-full">
+      <h1 class="font-script italic text-2xl sm:text-[2rem] leading-snug text-charcoal font-normal max-w-sm mx-auto mb-4">
         Get in touch
       </h1>
-      <p class="text-sm text-charcoal/65 leading-relaxed max-w-xs mx-auto">
-        Questions about the mail club, a custom order, or just want to say hello — I'd love to hear from you.
+      <p class="text-sm leading-relaxed max-w-xs mx-auto">
+        Questions about the mail club or just want to say hello, I'd love to hear from you!
       </p>
     </header>
 
-    <section class="w-full mb-12" aria-labelledby="contact-form-heading">
+    <section class="w-full" aria-labelledby="contact-form-heading">
       <h2 id="contact-form-heading" class="sr-only">Contact form</h2>
 
       <form id="contact-form" class="w-full flex flex-col gap-4" novalidate>
         <div>
-          <label for="name" class="block text-xs text-charcoal/60 mb-1.5 tracking-wide">Name</label>
+          <label for="name" class="form-label block text-xs mb-1.5 tracking-wide">Name</label>
           <input
             type="text"
             id="name"
             name="name"
             required
             autocomplete="name"
-            class="form-input w-full px-4 py-3.5 bg-transparent border border-charcoal/25 rounded-sm text-charcoal placeholder:text-charcoal/40 text-sm tracking-wide"
+            class="form-input w-full px-4 py-3.5 bg-transparent rounded-sm text-sm tracking-wide"
           >
         </div>
 
         <div>
-          <label for="email" class="block text-xs text-charcoal/60 mb-1.5 tracking-wide">Email</label>
+          <label for="email" class="form-label block text-xs mb-1.5 tracking-wide">Email</label>
           <input
             type="email"
             id="email"
@@ -157,26 +217,26 @@
             required
             autocomplete="email"
             placeholder="your@email.com"
-            class="form-input w-full px-4 py-3.5 bg-transparent border border-charcoal/25 rounded-sm text-charcoal placeholder:text-charcoal/40 text-sm tracking-wide"
+            class="form-input w-full px-4 py-3.5 bg-transparent rounded-sm text-sm tracking-wide"
           >
         </div>
 
         <div>
-          <label for="message" class="block text-xs text-charcoal/60 mb-1.5 tracking-wide">Message</label>
+          <label for="message" class="form-label block text-xs mb-1.5 tracking-wide">Message</label>
           <textarea
             id="message"
             name="message"
             required
             rows="5"
             placeholder="What's on your mind?"
-            class="form-textarea w-full px-4 py-3.5 bg-transparent border border-charcoal/25 rounded-sm text-charcoal placeholder:text-charcoal/40 text-sm tracking-wide resize-none"
+            class="form-textarea w-full px-4 py-3.5 bg-transparent rounded-sm text-sm tracking-wide resize-none"
           ></textarea>
         </div>
 
         <button
           type="submit"
           id="submit-btn"
-          class="submit-btn w-full py-3.5 bg-accent text-cream text-sm font-medium tracking-widest uppercase rounded-sm mt-1"
+          class="submit-btn w-full py-3.5 bg-accent text-cream text-sm rounded-sm mt-1"
         >
           Send Message
         </button>
@@ -188,9 +248,7 @@
       </form>
     </section>
 
-    <div class="w-8 h-px bg-charcoal/15 mb-10" aria-hidden="true"></div>
-
-    <section class="text-center w-full space-y-2">
+    <section class="contact-direct text-center w-full space-y-2">
       <p class="text-xs text-charcoal/55 mb-3">Or reach me directly</p>
       <a
         href="mailto:hello@slowbatchstudio.com"
@@ -210,8 +268,8 @@
 
   </main>
 
-  <footer class="w-full max-w-content mx-auto px-6 pb-10 text-center">
-    <p class="text-[11px] text-charcoal/40 tracking-wide flex items-center justify-center gap-1.5">
+  <footer class="w-full max-w-content mx-auto px-6 pb-8 text-center">
+    <p class="site-footer text-[11px] tracking-wide flex items-center justify-center gap-1.5">
       <span aria-hidden="true">✦</span>
       <span>&copy; 2026 Slowbatch Studio</span>
       <span aria-hidden="true">✦</span>
