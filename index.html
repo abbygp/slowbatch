@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Slowbatch Studio</title>
-  <meta name="description" content="A sensory baking ritual, delivered straight to your mailbox.">
+  <meta name="description" content="Recipes, handmade goods, and a monthly mail club from Slowbatch Studio.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -23,14 +22,12 @@
             accent: '#431407',
             'accent-dark': '#321003',
             'accent-light': '#e5dcd6',
+            banner: '#654a42',
           },
           fontFamily: {
             serif: ['Lora', 'Georgia', 'serif'],
             script: ['"Cormorant Garamond"', 'Georgia', 'serif'],
             sans: ['Lato', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: {
-            content: '480px',
           },
         },
       },
@@ -38,457 +35,382 @@
   </script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       font-weight: 400;
       color: #2c2a29;
+      background-color: #efeae7;
     }
 
-    /* 1. Sticky header — solid block, no bleed-through */
-    .top-nav {
+    .announce-bar {
+      background-color: #654a42;
+      color: #efeae7;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-align: center;
+      padding: 0.55rem 1rem;
+    }
+
+    .announce-bar a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .site-nav {
       position: sticky;
       top: 0;
       z-index: 100;
       background-color: #efeae7;
       border-bottom: 1px solid rgba(44, 42, 41, 0.1);
-      box-shadow: 0 1px 0 rgba(239, 234, 231, 1);
       isolation: isolate;
     }
 
-    .top-nav-inner {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      gap: 0.625rem;
-    }
-
-    /* Page rhythm — ~40px between major sections */
-    .page-main {
-      padding-top: 1.5rem;
-      padding-bottom: 2.5rem;
-    }
-
-    .header-tagline {
-      margin-bottom: 1.5rem;
-    }
-
-    .header-tagline h1 {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.0625rem;
-      line-height: 1.45;
-      font-style: italic;
-      font-weight: 400;
-      color: rgba(44, 42, 41, 0.72);
-      letter-spacing: 0.01em;
-    }
-
-    .section-signup {
-      margin-bottom: 2.5rem;
-    }
-
-    .section-signup .subtext {
-      margin-top: 0.75rem;
-    }
-
-    .section-divider {
-      margin-bottom: 2.5rem;
-    }
-
-    .link-hub {
-      gap: 0.75rem;
-      margin-bottom: 2.5rem;
+    .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
     }
 
     .brand-logo {
+      font-family: Lora, Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 500;
       letter-spacing: 0.22em;
-      font-weight: 500;
       color: #2c2a29;
+      text-transform: lowercase;
+      justify-self: start;
     }
 
-    .nav-link {
-      transition: color 0.2s ease;
-      font-weight: 500;
-      color: rgba(44, 42, 41, 0.85);
-    }
-
-    .nav-link:hover {
-      color: #431407;
-    }
-
-    .nav-link.is-active {
-      color: #431407;
-    }
-
-    /* Info accordion — below Substack */
-    .info-accordion {
-      margin-top: 1.5rem;
+    .nav-links {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem 1.35rem;
     }
 
-    .accordion-item {
-      border: 1px solid rgba(67, 20, 7, 0.25);
-      border-radius: 2px;
-      overflow: hidden;
+    .nav-links a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      color: rgba(44, 42, 41, 0.8);
+      transition: color 0.2s ease;
     }
 
-    .accordion-trigger {
+    .nav-links a:hover {
+      color: #431407;
+    }
+
+    .nav-tools {
+      justify-self: end;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+    }
+
+    .search-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      color: #2c2a29;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .search-btn:hover { opacity: 1; }
+
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(44, 42, 41, 0.55);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .trending-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem 1.25rem;
+    }
+
+    @media (min-width: 720px) {
+      .trending-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.75rem 1.5rem;
+      }
+    }
+
+    .recipe-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .recipe-card:hover { opacity: 0.88; }
+
+    .recipe-card-media {
       width: 100%;
-      padding: 0.875rem 1.125rem;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.75rem;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      background-color: #e5dcd6;
+    }
+
+    .recipe-card-title {
+      margin-top: 0.85rem;
+      font-family: Lato, system-ui, sans-serif;
+      font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.04em;
       text-transform: lowercase;
+      text-align: center;
       color: #2c2a29;
-      text-align: left;
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .accordion-trigger:hover {
-      background-color: rgba(67, 20, 7, 0.04);
-      color: #431407;
-    }
-
-    .accordion-item.is-open .accordion-trigger {
-      color: #431407;
-      background-color: rgba(67, 20, 7, 0.04);
-    }
-
-    .accordion-icon {
-      flex-shrink: 0;
-      margin-left: 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1;
-      color: #431407;
-      transition: transform 0.25s ease;
-    }
-
-    .accordion-item.is-open .accordion-icon {
-      transform: rotate(45deg);
-    }
-
-    .accordion-panel {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.25s ease;
-    }
-
-    .accordion-item.is-open .accordion-panel {
-      grid-template-rows: 1fr;
-    }
-
-    .accordion-panel-inner {
-      overflow: hidden;
-      padding: 0 1.125rem;
-      font-size: 0.75rem;
-      line-height: 1.6;
-      color: rgba(44, 42, 41, 0.8);
-    }
-
-    .accordion-item.is-open .accordion-panel-inner {
-      padding-top: 0.75rem;
-      padding-bottom: 1rem;
-    }
-
-    .accordion-panel-inner ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .accordion-panel-inner li + li {
-      margin-top: 0.5rem;
-    }
-
-    /* 2. Substack embed — borderless, native blend */
-    .substack-embed {
-      background-color: #efeae7;
-      border: none;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .substack-embed iframe {
-      display: block;
-      width: 100%;
-      min-height: 150px;
-      border: 0;
-      background-color: #efeae7;
-      color-scheme: light;
-    }
-
-    /* 3. Link buttons — accent brown, vertically centered */
-    .link-btn {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 3.25rem;
-      padding: 0.875rem 1.25rem;
-      border: 1px solid #431407;
-      background-color: transparent;
       line-height: 1.4;
-      transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .link-btn:hover {
-      background-color: #431407;
-      border-color: #431407;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(67, 20, 7, 0.12);
-    }
-
-    .link-btn:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    .link-btn .link-label {
+    .explore-more {
       display: flex;
-      align-items: center;
-      font-weight: 500;
-      font-size: 0.875rem;
-      line-height: 1.4;
-      color: #2c2a29;
-      transition: color 0.25s ease;
+      justify-content: center;
+      margin-top: 2rem;
     }
 
-    .link-btn:hover .link-label {
-      color: #efeae7;
-    }
-
-    .link-icon {
-      display: flex;
+    .explore-btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      width: 1.35rem;
-      height: 1.35rem;
-      color: #431407;
-      transition: color 0.25s ease;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid #431407;
+      background-color: transparent;
+      color: #2c2a29;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+      text-decoration: none;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
-    .link-btn:hover .link-icon {
+    .explore-btn:hover {
+      background-color: #431407;
       color: #efeae7;
+      border-color: #431407;
     }
 
-    .link-icon svg,
-    .link-icon img {
-      display: block;
-      width: 100%;
-      height: 100%;
+    .studio-strip {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(44, 42, 41, 0.1);
+      display: grid;
+      gap: 2rem;
     }
 
-    /* 4. Body text contrast */
-    .subtext {
+    @media (min-width: 720px) {
+      .studio-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    .studio-block h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 1.35rem;
       font-weight: 400;
+      margin-bottom: 0.6rem;
+      color: #2c2a29;
+    }
+
+    .studio-block p {
+      font-size: 0.85rem;
+      line-height: 1.65;
       color: rgba(44, 42, 41, 0.72);
+      margin-bottom: 1rem;
+    }
+
+    .studio-block a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      color: #431407;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .site-footer {
-      font-weight: 400;
-      color: rgba(44, 42, 41, 0.55);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+      text-align: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: rgba(44, 42, 41, 0.5);
+    }
+
+    @media (max-width: 719px) {
+      .site-nav-inner {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+      }
+
+      .brand-logo { grid-column: 1; }
+      .nav-tools { grid-column: 2; grid-row: 1; }
+      .nav-links {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: center;
+      }
     }
   </style>
 </head>
-<body class="bg-cream text-charcoal font-sans min-h-screen flex flex-col">
+<body>
 
-  <!-- Top Menu Bar -->
-  <nav class="top-nav w-full" aria-label="Main navigation">
-    <div class="top-nav-inner w-full max-w-content mx-auto px-6 flex flex-col items-center">
-      <a href="index.html" class="brand-logo font-serif text-base sm:text-lg lowercase shrink-0">
-        slowbatch
-      </a>
+  <!-- Top announcement bar -->
+  <div class="announce-bar">
+    June mail is sent — join the next batch via the
+    <a href="mailclub/">mail club</a>
+  </div>
 
-      <ul class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6">
-        <li>
-          <a href="index.html" class="nav-link is-active text-[11px] sm:text-xs tracking-wide lowercase" aria-current="page">
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="this-month.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
-            This month
-          </a>
-        </li>
-        <li>
-          <a href="contact.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
-            Contact
-          </a>
-        </li>
-      </ul>
+  <!-- Navigation -->
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="brand-logo">slowbatch</a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#recipes">Recipes</a>
+        <a href="https://www.etsy.com/shop/bycraftigail" target="_blank" rel="noopener noreferrer">Shop</a>
+        <a href="mailclub/">Mail Club</a>
+        <a href="https://slowbatch.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="nav-tools">
+        <button type="button" class="search-btn" aria-label="Search" title="Search coming soon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-3.5-3.5"/>
+          </svg>
+        </button>
+      </div>
     </div>
-  </nav>
+  </header>
 
-  <main class="page-main flex-1 w-full max-w-content mx-auto px-6 flex flex-col items-center">
+  <main class="page-wrap">
 
-    <!-- 1. Brand Header -->
-    <header class="header-tagline text-center w-full">
-      <h1 class="max-w-xs mx-auto">
-        Your sensory baking ritual, delivered straight to your mailbox.
-      </h1>
-    </header>
+    <!-- Trending Now -->
+    <section id="recipes" aria-labelledby="trending-heading">
+      <h2 id="trending-heading" class="section-label">Recents</h2>
 
-    <!-- 2. Email Sign-Up (Substack embed) -->
-    <section class="section-signup w-full" aria-labelledby="signup-heading">
-      <h2 id="signup-heading" class="sr-only">Join the Club</h2>
+      <div class="trending-grid">
+        <a
+          class="recipe-card"
+          href="https://slowbatch.substack.com/p/blueberry-streusel-muffins"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="recipe-card-media"
+            src="https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg"
+            alt="Blueberry Streusel Muffins"
+            width="800"
+            height="1067"
+            loading="lazy"
+          >
+          <h3 class="recipe-card-title">blueberry streusel muffins</h3>
+        </a>
 
-      <div class="substack-embed w-full">
-        <iframe
-          src="https://slowbatch.substack.com/embed"
-          height="320"
-          title="Subscribe to slowbatch on Substack"
-          scrolling="no"
-        ></iframe>
+        <a
+          class="recipe-card"
+          href="https://slowbatch.substack.com/p/lemon-shortbread"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="recipe-card-media"
+            src="https://substackcdn.com/image/fetch/$s_!R06p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfb3fc43-8820-47c5-8012-3c69c7dbbfea_3024x1583.jpeg"
+            alt="Lemon Shortbread"
+            width="800"
+            height="1067"
+            loading="lazy"
+          >
+          <h3 class="recipe-card-title">lemon shortbread</h3>
+        </a>
+
+        <a
+          class="recipe-card"
+          href="https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="recipe-card-media"
+            src="https://substackcdn.com/image/fetch/$s_!Bv7E!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5051f537-f5f0-475a-ad6d-6c6c65ea58c1_3293x2470.jpeg"
+            alt="Apple Cinnamon Oatmeal Bars"
+            width="800"
+            height="1067"
+            loading="lazy"
+          >
+          <h3 class="recipe-card-title">apple cinnamon oatmeal bars</h3>
+        </a>
       </div>
 
-      <p class="subtext text-xs leading-relaxed text-center">
-        Receive monthly updates, recipe previews, and studio notes.
-      </p>
-
-      <div class="info-accordion" role="presentation">
-        <div class="accordion-item">
-          <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-get">
-            What you get
-            <span class="accordion-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="panel-get" class="accordion-panel" role="region" aria-label="What you get">
-            <div class="accordion-panel-inner">
-              <ul>
-                <li>🍰 Physical 4x6 Cardstock Recipe Card</li>
-                <li>💌 Journal/Aftertaste Prompt</li>
-                <li>🫖 Individual Tea Bag</li>
-                <li>🌷 Scented Paper Charm</li>
-                <li>✨ Hand-Picked Sticker</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-pay">
-            What you pay
-            <span class="accordion-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="panel-pay" class="accordion-panel" role="region" aria-label="What you pay">
-            <div class="accordion-panel-inner">
-              <p>
-                <strong class="font-medium text-charcoal">$8/month</strong> on Substack, or <strong class="font-medium text-charcoal">$100/year</strong> for an extra blank recipe card and a handwritten thank-you note. All subscriptions are managed on
-                <a href="https://slowbatch.substack.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-charcoal">Substack</a>.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-when">
-            When to subscribe
-            <span class="accordion-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="panel-when" class="accordion-panel" role="region" aria-label="When to subscribe">
-            <div class="accordion-panel-inner">
-              <p>
-                Subscribe by the <strong class="font-medium text-charcoal">23rd of each month</strong> to receive that month's card in the mail.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="explore-more">
+        <a
+          class="explore-btn"
+          href="https://slowbatch.substack.com/archive"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          explore more on substack
+        </a>
       </div>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider w-8 h-px bg-charcoal/15" aria-hidden="true"></div>
+    <!-- Studio hub strip -->
+    <section class="studio-strip" id="about" aria-label="Studio paths">
+      <div class="studio-block">
+        <h2>recipes</h2>
+        <p>Soft, sensory baking notes — digital recipes that start in the kitchen and linger after the last bite.</p>
+        <a href="#recipes">browse recents</a>
+      </div>
 
-    <!-- 3. Cozy Link Hub -->
-    <nav class="link-hub w-full flex flex-col" aria-label="Links">
-      <a
-        href="https://www.etsy.com/shop/bycraftigail"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn gap-4 w-full rounded-sm"
-      >
-        <span class="link-icon" aria-hidden="true">
-          <svg viewBox="0 0 18 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.547,3.125v6.008c0,0,2.117,0,3.25-0.086c0.891-0.156,1.055-0.242,1.219-1.133l0.328-1.305h0.969l-0.164,2.852 l0.086,2.922h-0.977l-0.242-1.141c-0.242-0.812-0.57-0.977-1.219-1.055c-0.812-0.086-3.25-0.086-3.25-0.086v5.039 c0,0.969,0.492,1.383,1.625,1.383h3.414c1.055,0,2.109-0.086,2.766-1.625l0.883-1.953h0.82c-0.086,0.406-0.492,3.984-0.57,4.789 c0,0-3.086-0.078-4.383-0.078H5.25l-3.492,0.078v-0.883l1.133-0.25c0.82-0.164,1.062-0.406,1.062-1.055 c0,0,0.086-2.195,0.086-5.852c0-3.648-0.086-5.844-0.086-5.844c0-0.727-0.242-0.891-1.062-1.055L1.758,2.555V1.664l3.414,0.07h6.5 c1.297,0,3.484-0.234,3.484-0.234s-0.078,1.375-0.164,4.625h-0.891l-0.328-1.141c-0.32-1.461-0.805-2.188-1.703-2.188H6.961 C6.547,2.797,6.547,2.875,6.547,3.125z"/>
-          </svg>
-        </span>
-        <span class="link-label">Shop Handmade Crochet Goods on Etsy</span>
-      </a>
+      <div class="studio-block">
+        <h2>shop</h2>
+        <p>Handmade crochet goods from the studio shelf — tactile pieces made slowly and with care.</p>
+        <a href="https://www.etsy.com/shop/bycraftigail" target="_blank" rel="noopener noreferrer">visit etsy</a>
+      </div>
 
-      <a
-        href="https://www.instagram.com/bycraftigail/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn gap-4 w-full rounded-sm"
-      >
-        <span class="link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </span>
-        <span class="link-label">Follow the Visual Journey on Instagram</span>
-      </a>
-
-      <a
-        href="https://buymeacoffee.com/abbygprince"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn gap-4 w-full rounded-sm"
-      >
-        <span class="link-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 8h13v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8z"/>
-            <path d="M16 8h2a3 3 0 0 1 0 6h-2"/>
-            <path d="M6 2v2M10 2v2M14 2v2"/>
-          </svg>
-        </span>
-        <span class="link-label">Buy Me a Coffee</span>
-      </a>
-    </nav>
+      <div class="studio-block">
+        <h2>mail club</h2>
+        <p>A monthly recipe card ritual delivered to your mailbox — tea, charm, sticker, and a little quiet joy.</p>
+        <a href="mailclub/">join the club</a>
+      </div>
+    </section>
 
   </main>
 
-  <!-- 4. Minimalist Footer -->
-  <footer class="w-full max-w-content mx-auto px-6 pb-8 text-center">
-    <p class="site-footer text-[11px] tracking-wide flex items-center justify-center gap-1.5">
-      <span aria-hidden="true">✦</span>
-      <span>&copy; 2026 Slowbatch Studio</span>
-      <span aria-hidden="true">✦</span>
-    </p>
+  <footer class="site-footer">
+    <p>✦ &copy; 2026 Slowbatch Studio ✦</p>
   </footer>
-
-  <script>
-    document.querySelectorAll('.accordion-item').forEach((item) => {
-      const trigger = item.querySelector('.accordion-trigger');
-
-      trigger.addEventListener('click', () => {
-        const isOpen = item.classList.contains('is-open');
-
-        document.querySelectorAll('.accordion-item.is-open').forEach((openItem) => {
-          openItem.classList.remove('is-open');
-          openItem.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-        });
-
-        if (!isOpen) {
-          item.classList.add('is-open');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>
