@@ -129,6 +129,124 @@
 
     .search-btn:hover { opacity: 1; }
 
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(44, 42, 41, 0.35);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12vh 1.25rem 2rem;
+    }
+
+    .search-overlay.is-open {
+      display: flex;
+    }
+
+    .search-panel {
+      width: 100%;
+      max-width: 420px;
+      background: #efeae7;
+      border: 1px solid rgba(67, 20, 7, 0.18);
+      box-shadow: 0 16px 40px rgba(44, 42, 41, 0.12);
+      padding: 1.25rem;
+    }
+
+    .search-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .search-panel-header h2 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(44, 42, 41, 0.55);
+    }
+
+    .search-close {
+      border: none;
+      background: transparent;
+      font-size: 1.25rem;
+      line-height: 1;
+      color: #431407;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(67, 20, 7, 0.22);
+      background: transparent;
+      color: #2c2a29;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin-bottom: 0.85rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #431407;
+      box-shadow: 0 0 0 3px rgba(67, 20, 7, 0.1);
+    }
+
+    .search-results {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .search-results li a {
+      display: block;
+      padding: 0.7rem 0.35rem;
+      border-bottom: 1px solid rgba(44, 42, 41, 0.08);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2c2a29;
+      text-decoration: none;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+    }
+
+    .search-results li a:hover {
+      color: #431407;
+    }
+
+    .search-empty {
+      font-size: 0.8rem;
+      color: rgba(44, 42, 41, 0.55);
+      padding: 0.5rem 0.35rem;
+    }
+
+    .search-empty a {
+      color: #431407;
+      text-underline-offset: 2px;
+    }
+
+    body.search-open {
+      overflow: hidden;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .page-wrap {
       max-width: 1100px;
       margin: 0 auto;
@@ -304,7 +422,7 @@
       </nav>
 
       <div class="nav-tools">
-        <button type="button" class="search-btn" aria-label="Search" title="Search coming soon">
+        <button type="button" class="search-btn" id="search-open" aria-label="Search recipes" aria-expanded="false" aria-controls="search-overlay">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="7"/>
             <path d="M20 20l-3.5-3.5"/>
@@ -313,6 +431,28 @@
       </div>
     </div>
   </header>
+
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-title" hidden>
+    <div class="search-panel">
+      <div class="search-panel-header">
+        <h2 id="search-title">Search</h2>
+        <button type="button" class="search-close" id="search-close" aria-label="Close search">×</button>
+      </div>
+      <label for="search-input" class="sr-only">Search recipes</label>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Try lemon, scones, muffins…"
+        autocomplete="off"
+      >
+      <ul class="search-results" id="search-results"></ul>
+      <p class="search-empty" id="search-empty" hidden>
+        No matches here —
+        <a href="https://slowbatch.substack.com/archive" target="_blank" rel="noopener noreferrer">browse the full archive</a>
+      </p>
+    </div>
+  </div>
 
   <main class="page-wrap">
 
@@ -411,6 +551,79 @@
   <footer class="site-footer">
     <p>✦ &copy; 2026 Slowbatch Studio ✦</p>
   </footer>
+
+  <script>
+    const recipes = [
+      { title: 'Blueberry Streusel Muffins', url: 'https://slowbatch.substack.com/p/blueberry-streusel-muffins' },
+      { title: 'Lemon Shortbread', url: 'https://slowbatch.substack.com/p/lemon-shortbread' },
+      { title: 'Apple Cinnamon Oatmeal Bars', url: 'https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars' },
+      { title: 'Banana Bread Pudding', url: 'https://slowbatch.substack.com/p/banana-bread-pudding' },
+      { title: 'Rose Shortbread', url: 'https://slowbatch.substack.com/p/rose-shortbread' },
+      { title: 'Soft Apple Cinnamon Scones', url: 'https://slowbatch.substack.com/p/soft-apple-cinnamon-scones' },
+      { title: 'Mojito Puff Pastry', url: 'https://slowbatch.substack.com/p/mojito-puff-pastry' },
+      { title: 'Mini Lemon Loaves', url: 'https://slowbatch.substack.com/p/mini-lemon-loaves' },
+      { title: 'Peppermint Chocolate Blossom Cookies', url: 'https://slowbatch.substack.com/p/peppermint-chocolate-blossom-cookies' },
+      { title: 'Mail Club', url: 'mailclub/' },
+      { title: 'This Month', url: 'this-month.html' },
+      { title: 'Contact', url: 'contact.html' },
+    ];
+
+    const overlay = document.getElementById('search-overlay');
+    const openBtn = document.getElementById('search-open');
+    const closeBtn = document.getElementById('search-close');
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    const empty = document.getElementById('search-empty');
+
+    function renderResults(query) {
+      const q = query.trim().toLowerCase();
+      const matches = q
+        ? recipes.filter((item) => item.title.toLowerCase().includes(q))
+        : recipes.slice(0, 6);
+
+      results.innerHTML = matches
+        .map((item) => {
+          const external = item.url.startsWith('http');
+          const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+          return `<li><a href="${item.url}"${attrs}>${item.title.toLowerCase()}</a></li>`;
+        })
+        .join('');
+
+      empty.hidden = matches.length > 0;
+    }
+
+    function openSearch() {
+      overlay.hidden = false;
+      overlay.classList.add('is-open');
+      document.body.classList.add('search-open');
+      openBtn.setAttribute('aria-expanded', 'true');
+      renderResults('');
+      input.value = '';
+      setTimeout(() => input.focus(), 0);
+    }
+
+    function closeSearch() {
+      overlay.classList.remove('is-open');
+      overlay.hidden = true;
+      document.body.classList.remove('search-open');
+      openBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    openBtn.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) closeSearch();
+    });
+
+    input.addEventListener('input', () => renderResults(input.value));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
+        closeSearch();
+      }
+    });
+  </script>
 
 </body>
 </html>
