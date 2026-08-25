@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mail Club — Slowbatch Studio</title>
-  <meta name="description" content="A sensory baking ritual, delivered straight to your mailbox.">
+  <meta name="description" content="A monthly recipe card, delivered to your mailbox.">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 
   <!-- Google Fonts -->
@@ -97,6 +97,56 @@
 
     .section-divider {
       margin-bottom: 2.5rem;
+    }
+
+    .mail-status {
+      width: 100%;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .mail-status-month {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(44, 42, 41, 0.55);
+      margin-bottom: 0.75rem;
+    }
+
+    .mail-status-recipe {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: #2c2a29;
+      margin-bottom: 1.5rem;
+    }
+
+    .mail-status-logistics {
+      display: grid;
+      gap: 0.85rem;
+      text-align: left;
+      border-top: 1px solid rgba(44, 42, 41, 0.1);
+      padding-top: 1.35rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: rgba(44, 42, 41, 0.78);
+    }
+
+    .mail-status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .mail-status-row dt {
+      color: rgba(44, 42, 41, 0.55);
+    }
+
+    .mail-status-row dd {
+      text-align: right;
+      color: #2c2a29;
     }
 
     .link-hub {
@@ -324,11 +374,6 @@
           </a>
         </li>
         <li>
-          <a href="../this-month.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
-            This month
-          </a>
-        </li>
-        <li>
           <a href="../contact.html" class="nav-link text-[11px] sm:text-xs tracking-wide lowercase">
             Contact
           </a>
@@ -342,7 +387,7 @@
     <!-- 1. Brand Header -->
     <header class="header-tagline text-center w-full">
       <h1 class="max-w-xs mx-auto">
-        Your sensory baking ritual, delivered straight to your mailbox.
+        A monthly recipe card, delivered to your mailbox.
       </h1>
     </header>
 
@@ -372,11 +417,7 @@
           <div id="panel-get" class="accordion-panel" role="region" aria-label="What you get">
             <div class="accordion-panel-inner">
               <ul>
-                <li>🍰 Physical 4x6 Cardstock Recipe Card</li>
-                <li>💌 Journal/Aftertaste Prompt</li>
-                <li>🫖 Individual Tea Bag</li>
-                <li>🌷 Scented Paper Charm</li>
-                <li>✨ Hand-Picked Sticker</li>
+                <li>🍰 A physical 4x6 recipe card in the mail each month</li>
               </ul>
             </div>
           </div>
@@ -390,7 +431,7 @@
           <div id="panel-pay" class="accordion-panel" role="region" aria-label="What you pay">
             <div class="accordion-panel-inner">
               <p>
-                <strong class="font-medium text-charcoal">$8/month</strong> on Substack, or <strong class="font-medium text-charcoal">$100/year</strong> for an extra blank recipe card and a handwritten thank-you note. All subscriptions are managed on
+                <strong class="font-medium text-charcoal">$5/month</strong> on Substack, or <strong class="font-medium text-charcoal">$80/year</strong> for an extra blank recipe card and a handwritten thank-you note. All subscriptions are managed on
                 <a href="https://slowbatch.substack.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-charcoal">Substack</a>.
               </p>
             </div>
@@ -411,6 +452,29 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!--
+      UPDATE THIS SECTION EACH MONTH
+      Edit month, recipe name, and logistics below.
+    -->
+    <section class="mail-status" id="mail-status" aria-labelledby="mail-status-heading">
+      <p class="mail-status-month">July 2026</p>
+      <h2 id="mail-status-heading" class="mail-status-recipe">Blueberry Streusel Muffins</h2>
+      <dl class="mail-status-logistics">
+        <div class="mail-status-row">
+          <dt>Subscribe by</dt>
+          <dd>July 23</dd>
+        </div>
+        <div class="mail-status-row">
+          <dt>Cards ship</dt>
+          <dd>Late July</dd>
+        </div>
+        <div class="mail-status-row">
+          <dt>Mail status</dt>
+          <dd>Sent</dd>
+        </div>
+      </dl>
     </section>
 
     <!-- Divider -->

@@ -120,14 +120,27 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 2rem;
+      gap: 0.4rem;
+      min-width: 2rem;
       height: 2rem;
+      padding: 0 0.35rem;
       color: #2c2a29;
       opacity: 0.7;
       transition: opacity 0.2s ease;
     }
 
     .search-btn:hover { opacity: 1; }
+
+    .search-btn-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+    }
+
+    @media (max-width: 719px) {
+      .search-btn-label { display: none; }
+    }
 
     .search-overlay {
       position: fixed;
@@ -231,7 +244,8 @@
       text-underline-offset: 2px;
     }
 
-    body.search-open {
+    body.search-open,
+    body.category-open {
       overflow: hidden;
     }
 
@@ -261,6 +275,71 @@
       color: rgba(44, 42, 41, 0.55);
       margin-bottom: 1.5rem;
       text-align: center;
+    }
+
+    .recipe-group-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: center;
+      color: #2c2a29;
+      margin-bottom: 2rem;
+      text-transform: none;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem 1.5rem;
+    }
+
+    @media (min-width: 720px) {
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .category-card {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      text-align: center;
+      color: inherit;
+      font: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .category-card:hover { opacity: 0.88; }
+
+    .category-card:focus-visible {
+      outline: 2px solid #431407;
+      outline-offset: 4px;
+    }
+
+    .category-card-media {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      background-color: #e5dcd6;
+    }
+
+    .category-card-title {
+      margin-top: 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      color: #2c2a29;
+      line-height: 1.4;
     }
 
     .trending-grid {
@@ -305,32 +384,79 @@
       line-height: 1.4;
     }
 
-    .explore-more {
+    .recipe-section + .recipe-section {
+      margin-top: 3.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(44, 42, 41, 0.1);
+    }
+
+    .category-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(44, 42, 41, 0.35);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 8vh 1.25rem 2rem;
+      overflow-y: auto;
+    }
+
+    .category-overlay.is-open {
+      display: flex;
+    }
+
+    .category-panel {
+      width: 100%;
+      max-width: 960px;
+      background: #efeae7;
+      border: 1px solid rgba(67, 20, 7, 0.18);
+      box-shadow: 0 16px 40px rgba(44, 42, 41, 0.12);
+      padding: 1.5rem 1.35rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .category-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-panel-header h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #2c2a29;
+      text-transform: lowercase;
+    }
+
+    .category-close {
+      border: none;
+      background: transparent;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: #431407;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .category-panel-more {
       display: flex;
       justify-content: center;
-      margin-top: 2rem;
+      margin-top: 1.75rem;
     }
 
-    .explore-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.8rem 1.5rem;
-      border: 1px solid #431407;
-      background-color: transparent;
-      color: #2c2a29;
-      font-size: 0.75rem;
+    .category-panel-more a {
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: lowercase;
-      text-decoration: none;
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-    }
-
-    .explore-btn:hover {
-      background-color: #431407;
-      color: #efeae7;
-      border-color: #431407;
+      color: #431407;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .studio-strip {
@@ -404,7 +530,7 @@
 
   <!-- Top announcement bar -->
   <div class="announce-bar">
-    June mail is sent — join the next batch via the
+    July mail is sent — join the next batch via the
     <a href="mailclub/">mail club</a>
   </div>
 
@@ -427,6 +553,7 @@
             <circle cx="11" cy="11" r="7"/>
             <path d="M20 20l-3.5-3.5"/>
           </svg>
+          <span class="search-btn-label">Search</span>
         </button>
       </div>
     </div>
@@ -435,7 +562,7 @@
   <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-title" hidden>
     <div class="search-panel">
       <div class="search-panel-header">
-        <h2 id="search-title">Search</h2>
+        <h2 id="search-title">Search recipes</h2>
         <button type="button" class="search-close" id="search-close" aria-label="Close search">×</button>
       </div>
       <label for="search-input" class="sr-only">Search recipes</label>
@@ -443,7 +570,7 @@
         type="search"
         id="search-input"
         class="search-input"
-        placeholder="Try lemon, scones, muffins…"
+        placeholder="Try matcha, syrup, muffins…"
         autocomplete="off"
       >
       <ul class="search-results" id="search-results"></ul>
@@ -454,83 +581,64 @@
     </div>
   </div>
 
+  <div class="category-overlay" id="category-overlay" role="dialog" aria-modal="true" aria-labelledby="category-title" hidden>
+    <div class="category-panel">
+      <div class="category-panel-header">
+        <h2 id="category-title">Recipes</h2>
+        <button type="button" class="category-close" id="category-close" aria-label="Close category">×</button>
+      </div>
+      <div class="trending-grid" id="category-grid"></div>
+      <div class="category-panel-more" id="category-more" hidden>
+        <a href="#" target="_blank" rel="noopener noreferrer" id="category-more-link">see all on substack</a>
+      </div>
+    </div>
+  </div>
+
   <main class="page-wrap">
 
-    <!-- Trending Now -->
-    <section id="recipes" aria-labelledby="trending-heading">
-      <h2 id="trending-heading" class="section-label">Recents</h2>
+    <!-- Recipe category thumbnails -->
+    <div id="recipes">
 
-      <div class="trending-grid">
-        <a
-          class="recipe-card"
-          href="https://slowbatch.substack.com/p/blueberry-streusel-muffins"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="recipe-card-media"
-            src="https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg"
-            alt="Blueberry Streusel Muffins"
-            width="800"
-            height="1067"
-            loading="lazy"
-          >
-          <h3 class="recipe-card-title">blueberry streusel muffins</h3>
-        </a>
-
-        <a
-          class="recipe-card"
-          href="https://slowbatch.substack.com/p/lemon-shortbread"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="recipe-card-media"
-            src="https://substackcdn.com/image/fetch/$s_!R06p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfb3fc43-8820-47c5-8012-3c69c7dbbfea_3024x1583.jpeg"
-            alt="Lemon Shortbread"
-            width="800"
-            height="1067"
-            loading="lazy"
-          >
-          <h3 class="recipe-card-title">lemon shortbread</h3>
-        </a>
-
-        <a
-          class="recipe-card"
-          href="https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="recipe-card-media"
-            src="https://substackcdn.com/image/fetch/$s_!Bv7E!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5051f537-f5f0-475a-ad6d-6c6c65ea58c1_3293x2470.jpeg"
-            alt="Apple Cinnamon Oatmeal Bars"
-            width="800"
-            height="1067"
-            loading="lazy"
-          >
-          <h3 class="recipe-card-title">apple cinnamon oatmeal bars</h3>
-        </a>
-      </div>
-
-      <div class="explore-more">
-        <a
-          class="explore-btn"
-          href="https://slowbatch.substack.com/archive"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          explore more on substack
-        </a>
+    <section class="recipe-section" aria-labelledby="studio-heading">
+      <h2 id="studio-heading" class="recipe-group-title">the studio</h2>
+      <div class="category-grid">
+        <button type="button" class="category-card" data-category="baked" aria-haspopup="dialog">
+          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+          <span class="category-card-title">baked</span>
+        </button>
+        <button type="button" class="category-card" data-category="butters" aria-haspopup="dialog">
+          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!mr5W!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef51b828-7f47-4956-bcf5-15b8f0623176_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+          <span class="category-card-title">butters</span>
+        </button>
+        <button type="button" class="category-card" data-category="extracts" aria-haspopup="dialog">
+          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!es5S!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d7001a6-ca52-40c7-98e8-6f56f343dd0f_736x385.jpeg" alt="" width="800" height="500" loading="lazy">
+          <span class="category-card-title">extracts</span>
+        </button>
       </div>
     </section>
+
+    <section class="recipe-section" aria-labelledby="cafe-heading">
+      <h2 id="cafe-heading" class="recipe-group-title">the café</h2>
+      <div class="category-grid">
+        <button type="button" class="category-card" data-category="lattes" aria-haspopup="dialog">
+          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!TsvM!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2a6fdeb5-77b1-4fe2-a37e-e68e6f40b9b3_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
+          <span class="category-card-title">lattes</span>
+        </button>
+        <button type="button" class="category-card" data-category="syrups" aria-haspopup="dialog">
+          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!awiB!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6535f730-1834-418f-8017-21fd7c593b43_1456x762.webp" alt="" width="800" height="500" loading="lazy">
+          <span class="category-card-title">syrups</span>
+        </button>
+      </div>
+    </section>
+
+    </div>
 
     <!-- Studio hub strip -->
     <section class="studio-strip" id="about" aria-label="Studio paths">
       <div class="studio-block">
         <h2>recipes</h2>
-        <p>Soft, sensory baking notes — digital recipes that start in the kitchen and linger after the last bite.</p>
-        <a href="#recipes">browse recents</a>
+        <p>Digital recipes from the studio kitchen — soft, from-scratch baking notes you can make at home.</p>
+        <a href="#recipes">browse recipes</a>
       </div>
 
       <div class="studio-block">
@@ -541,7 +649,7 @@
 
       <div class="studio-block">
         <h2>mail club</h2>
-        <p>A monthly recipe card ritual delivered to your mailbox — tea, charm, sticker, and a little quiet joy.</p>
+        <p>A monthly recipe card delivered to your mailbox — one printed recipe, made slowly and with care.</p>
         <a href="mailclub/">join the club</a>
       </div>
     </section>
@@ -553,20 +661,108 @@
   </footer>
 
   <script>
-    const recipes = [
-      { title: 'Blueberry Streusel Muffins', url: 'https://slowbatch.substack.com/p/blueberry-streusel-muffins' },
-      { title: 'Lemon Shortbread', url: 'https://slowbatch.substack.com/p/lemon-shortbread' },
-      { title: 'Apple Cinnamon Oatmeal Bars', url: 'https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars' },
-      { title: 'Banana Bread Pudding', url: 'https://slowbatch.substack.com/p/banana-bread-pudding' },
-      { title: 'Rose Shortbread', url: 'https://slowbatch.substack.com/p/rose-shortbread' },
-      { title: 'Soft Apple Cinnamon Scones', url: 'https://slowbatch.substack.com/p/soft-apple-cinnamon-scones' },
-      { title: 'Mojito Puff Pastry', url: 'https://slowbatch.substack.com/p/mojito-puff-pastry' },
-      { title: 'Mini Lemon Loaves', url: 'https://slowbatch.substack.com/p/mini-lemon-loaves' },
-      { title: 'Peppermint Chocolate Blossom Cookies', url: 'https://slowbatch.substack.com/p/peppermint-chocolate-blossom-cookies' },
-      { title: 'Mail Club', url: 'mailclub/' },
-      { title: 'This Month', url: 'this-month.html' },
-      { title: 'Contact', url: 'contact.html' },
-    ];
+    const categories = {
+      baked: {
+        title: 'baked',
+        moreUrl: 'https://slowbatch.substack.com/t/free',
+        recipes: [
+          { title: 'Blueberry Streusel Muffins', url: 'https://slowbatch.substack.com/p/blueberry-streusel-muffins', image: 'https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg', tags: ['baked', 'muffin', 'studio'] },
+          { title: 'Lemon Shortbread', url: 'https://slowbatch.substack.com/p/lemon-shortbread', image: 'https://substackcdn.com/image/fetch/$s_!R06p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfb3fc43-8820-47c5-8012-3c69c7dbbfea_3024x1583.jpeg', tags: ['baked', 'cookie', 'studio'] },
+          { title: 'Apple Cinnamon Oatmeal Bars', url: 'https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars', image: 'https://substackcdn.com/image/fetch/$s_!Bv7E!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5051f537-f5f0-475a-ad6d-6c6c65ea58c1_3293x2470.jpeg', tags: ['baked', 'bar', 'studio'] },
+          { title: 'Banana Bread Pudding', url: 'https://slowbatch.substack.com/p/banana-bread-pudding', image: 'https://substackcdn.com/image/fetch/$s_!UGnm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06d0c738-b537-4e32-b10e-c2c146c960a8_3024x1583.jpeg', tags: ['baked', 'studio'] },
+          { title: 'Rose Shortbread', url: 'https://slowbatch.substack.com/p/rose-shortbread', image: 'https://substackcdn.com/image/fetch/$s_!nrhZ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb6f0acca-8f88-40ab-a622-10e815e287b2_4284x2243.jpeg', tags: ['baked', 'cookie', 'studio'] },
+          { title: 'Soft Apple Cinnamon Scones', url: 'https://slowbatch.substack.com/p/soft-apple-cinnamon-scones', image: 'https://substackcdn.com/image/fetch/$s_!4aiD!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8c82bccf-c7ad-4c61-8a59-aa32c598c775_3024x2268.jpeg', tags: ['baked', 'scone', 'studio'] },
+          { title: 'Mojito Puff Pastry', url: 'https://slowbatch.substack.com/p/mojito-puff-pastry', image: 'https://substackcdn.com/image/fetch/$s_!pVEv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05b11381-0ccb-4b59-98db-ee37efcf59f5_3024x1583.jpeg', tags: ['baked', 'studio'] },
+          { title: 'Mini Lemon Loaves', url: 'https://slowbatch.substack.com/p/mini-lemon-loaves', image: 'https://substackcdn.com/image/fetch/$s_!qN2T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbda7f1b0-5a1c-464f-91da-15d0e680bc28_3024x1583.jpeg', tags: ['baked', 'studio'] },
+          { title: 'Peppermint Chocolate Blossom Cookies', url: 'https://slowbatch.substack.com/p/peppermint-chocolate-blossom-cookies', image: 'https://substackcdn.com/image/fetch/$s_!eZIy!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe92c6b7c-ecfb-4489-9bc9-41749f4900a0_3024x1583.jpeg', tags: ['baked', 'cookie', 'studio'] },
+        ],
+      },
+      butters: {
+        title: 'butters',
+        moreUrl: 'https://slowbatch.substack.com/t/butters',
+        recipes: [
+          { title: 'Mexican Street Corn Butter', url: 'https://slowbatch.substack.com/p/mexican-street-corn-butter', image: 'https://substackcdn.com/image/fetch/$s_!mr5W!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef51b828-7f47-4956-bcf5-15b8f0623176_3024x1583.jpeg', tags: ['butter', 'studio'] },
+        ],
+      },
+      extracts: {
+        title: 'extracts',
+        moreUrl: 'https://slowbatch.substack.com/t/extracts',
+        recipes: [
+          { title: 'Homemade Mint Extract', url: 'https://slowbatch.substack.com/p/mint-extract', image: 'https://substackcdn.com/image/fetch/$s_!es5S!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d7001a6-ca52-40c7-98e8-6f56f343dd0f_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
+          { title: 'Homemade Grapefruit Extract', url: 'https://slowbatch.substack.com/p/grapefruit-extract', image: 'https://substackcdn.com/image/fetch/$s_!IJKH!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9a83ea67-0084-45ba-8a1a-2c4825b6f76b_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
+          { title: 'Homemade Orange Extract', url: 'https://slowbatch.substack.com/p/orange-extract', image: 'https://substackcdn.com/image/fetch/$s_!etRk!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef17804a-1826-474c-a834-4548af400157_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
+          { title: 'Homemade Vanilla Extract', url: 'https://slowbatch.substack.com/p/vanilla-extract', image: 'https://substackcdn.com/image/fetch/$s_!m14v!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4a1ab863-9c72-40be-9ca0-d86174f28348_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
+        ],
+      },
+      lattes: {
+        title: 'lattes',
+        moreUrl: 'https://slowbatch.substack.com/t/latte',
+        recipes: [
+          { title: 'Iced French Vanilla Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-french-vanilla-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!TsvM!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2a6fdeb5-77b1-4fe2-a37e-e68e6f40b9b3_4284x2243.jpeg', tags: ['latte', 'matcha', 'café', 'cafe'] },
+          { title: 'Iced London Fog Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-london-fog-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!Kf2T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3beb3df4-564c-46a9-be67-66ce43afe98d_4284x2243.jpeg', tags: ['latte', 'matcha', 'earl grey', 'café', 'cafe'] },
+        ],
+      },
+      syrups: {
+        title: 'syrups',
+        moreUrl: 'https://slowbatch.substack.com/t/syrups',
+        recipes: [
+          { title: 'Hazelnut Simple Syrup', url: 'https://slowbatch.substack.com/p/hazelnut-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!awiB!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6535f730-1834-418f-8017-21fd7c593b43_1456x762.webp', tags: ['syrup', 'café', 'cafe', 'exclusive'] },
+          { title: 'Earl Grey Simple Syrup', url: 'https://slowbatch.substack.com/p/earl-grey-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!lofI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F28893e82-e5dd-4ac6-83b0-ee4e68a8815b_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'exclusive'] },
+          { title: 'Vanilla Simple Syrup', url: 'https://slowbatch.substack.com/p/vanilla-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!B-bE!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff42d79f7-8ddd-4c41-9dc8-69a2e3411d5b_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'exclusive'] },
+        ],
+      },
+    };
+
+    const recipes = Object.values(categories).flatMap((category) => category.recipes);
+
+    const categoryOverlay = document.getElementById('category-overlay');
+    const categoryTitle = document.getElementById('category-title');
+    const categoryGrid = document.getElementById('category-grid');
+    const categoryMore = document.getElementById('category-more');
+    const categoryMoreLink = document.getElementById('category-more-link');
+    const categoryClose = document.getElementById('category-close');
+
+    function openCategory(key) {
+      const category = categories[key];
+      if (!category) return;
+
+      categoryTitle.textContent = category.title;
+      categoryGrid.innerHTML = category.recipes
+        .map((item) => `
+          <a class="recipe-card" href="${item.url}" target="_blank" rel="noopener noreferrer">
+            <img class="recipe-card-media" src="${item.image}" alt="${item.title}" width="800" height="500" loading="lazy">
+            <p class="recipe-card-title">${item.title.toLowerCase()}</p>
+          </a>
+        `)
+        .join('');
+
+      if (category.moreUrl) {
+        categoryMore.hidden = false;
+        categoryMoreLink.href = category.moreUrl;
+      } else {
+        categoryMore.hidden = true;
+      }
+
+      categoryOverlay.hidden = false;
+      categoryOverlay.classList.add('is-open');
+      document.body.classList.add('category-open');
+      categoryClose.focus();
+    }
+
+    function closeCategory() {
+      categoryOverlay.classList.remove('is-open');
+      categoryOverlay.hidden = true;
+      document.body.classList.remove('category-open');
+    }
+
+    document.querySelectorAll('[data-category]').forEach((button) => {
+      button.addEventListener('click', () => openCategory(button.dataset.category));
+    });
+
+    categoryClose.addEventListener('click', closeCategory);
+    categoryOverlay.addEventListener('click', (event) => {
+      if (event.target === categoryOverlay) closeCategory();
+    });
 
     const overlay = document.getElementById('search-overlay');
     const openBtn = document.getElementById('search-open');
@@ -575,11 +771,16 @@
     const results = document.getElementById('search-results');
     const empty = document.getElementById('search-empty');
 
+    function matchesQuery(item, q) {
+      const haystack = [item.title, ...(item.tags || [])].join(' ').toLowerCase();
+      return haystack.includes(q);
+    }
+
     function renderResults(query) {
       const q = query.trim().toLowerCase();
       const matches = q
-        ? recipes.filter((item) => item.title.toLowerCase().includes(q))
-        : recipes.slice(0, 6);
+        ? recipes.filter((item) => matchesQuery(item, q))
+        : recipes.slice(0, 8);
 
       results.innerHTML = matches
         .map((item) => {
@@ -593,6 +794,7 @@
     }
 
     function openSearch() {
+      closeCategory();
       overlay.hidden = false;
       overlay.classList.add('is-open');
       document.body.classList.add('search-open');
@@ -619,8 +821,25 @@
     input.addEventListener('input', () => renderResults(input.value));
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
-        closeSearch();
+      if (event.key === 'Escape') {
+        if (overlay.classList.contains('is-open')) {
+          closeSearch();
+          return;
+        }
+        if (categoryOverlay.classList.contains('is-open')) {
+          closeCategory();
+          return;
+        }
+      }
+
+      const typingInField = event.target instanceof HTMLInputElement
+        || event.target instanceof HTMLTextAreaElement
+        || event.target?.isContentEditable;
+
+      if ((event.key === 'k' || event.key === 'K') && (event.metaKey || event.ctrlKey) && !typingInField) {
+        event.preventDefault();
+        if (overlay.classList.contains('is-open')) closeSearch();
+        else openSearch();
       }
     });
   </script>
