@@ -285,8 +285,51 @@
       letter-spacing: 0.02em;
       text-align: center;
       color: #2c2a29;
-      margin-bottom: 2rem;
+      margin-bottom: 0;
       text-transform: none;
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    .recipe-group-title::-webkit-details-marker {
+      display: none;
+    }
+
+    .recipe-group-title::after {
+      content: '';
+      width: 0.45rem;
+      height: 0.45rem;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      opacity: 0.55;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      margin-top: -0.2rem;
+    }
+
+    .recipe-group[open] > .recipe-group-title::after {
+      transform: rotate(-135deg);
+      margin-top: 0.15rem;
+    }
+
+    .recipe-group-title:hover {
+      color: #431407;
+    }
+
+    .recipe-group-title:focus-visible {
+      outline: 2px solid #431407;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    .recipe-group .category-grid {
+      margin-top: 2rem;
     }
 
     .category-grid {
@@ -599,58 +642,84 @@
     <!-- Recipe category thumbnails (mirrors Substack nav groups) -->
     <div id="recipes">
 
-    <section class="recipe-section" aria-labelledby="bakery-heading">
-      <h2 id="bakery-heading" class="recipe-group-title">the bakery</h2>
-      <div class="category-grid">
-        <button type="button" class="category-card" data-category="cookies" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!52U7!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78e0e29b-e17f-4d83-9b7a-f6dd6ef582ae_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">cookies</span>
-        </button>
-        <button type="button" class="category-card" data-category="muffins" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">muffins</span>
-        </button>
-        <button type="button" class="category-card" data-category="bars" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!Bv7E!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5051f537-f5f0-475a-ad6d-6c6c65ea58c1_3293x2470.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">bars</span>
-        </button>
-        <button type="button" class="category-card" data-category="pastries" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!pVEv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05b11381-0ccb-4b59-98db-ee37efcf59f5_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">pastries</span>
-        </button>
-      </div>
+    <section class="recipe-section">
+      <details class="recipe-group" open>
+        <summary id="bakery-heading" class="recipe-group-title">the bakery</summary>
+        <div class="category-grid">
+          <button type="button" class="category-card" data-category="cookies" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!TJWv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ea47f32-7b8b-4e1e-8c94-2714e86c3ad6_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">cookies</span>
+          </button>
+          <button type="button" class="category-card" data-category="muffins" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!61tV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ac677f4-a227-49c0-8d08-aaeb53df7db0_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">muffins</span>
+          </button>
+          <button type="button" class="category-card" data-category="bars" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!1mp1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b5142f8-9fab-4fb0-877c-9a172ca66d8c_1512x792.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">bars</span>
+          </button>
+          <button type="button" class="category-card" data-category="pastries" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!pVEv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05b11381-0ccb-4b59-98db-ee37efcf59f5_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">pastries</span>
+          </button>
+          <button type="button" class="category-card" data-category="donuts" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!p7hG!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3829c2e5-51d2-4f2c-b359-c1fa1ac527c2_3379x1769.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">donuts</span>
+          </button>
+          <button type="button" class="category-card" data-category="bread" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!pJiQ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F158e73b9-e9dd-4fee-8f58-e36f2eb42038_4144x2170.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">bread</span>
+          </button>
+        </div>
+      </details>
     </section>
 
-    <section class="recipe-section" aria-labelledby="cafe-heading">
-      <h2 id="cafe-heading" class="recipe-group-title">the café</h2>
-      <div class="category-grid">
-        <button type="button" class="category-card" data-category="coffee" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!vj6M!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30b88418-b3b2-45b0-8e4b-07fc2b682a3c_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">coffee</span>
-        </button>
-        <button type="button" class="category-card" data-category="matcha" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!JVKn!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b0ca8a4-a785-44ca-a7ed-5a2cd1bfc939_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">matcha</span>
-        </button>
-        <button type="button" class="category-card" data-category="syrups" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!Iznc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88ac1787-9fc0-4755-846d-495b1531efa1_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">syrups</span>
-        </button>
-      </div>
+    <section class="recipe-section">
+      <details class="recipe-group" open>
+        <summary id="cafe-heading" class="recipe-group-title">the café</summary>
+        <div class="category-grid">
+          <button type="button" class="category-card" data-category="coffee" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!UTES!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84a3e8d-11f8-453e-89e5-ae08a2b590cd_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">coffee</span>
+          </button>
+          <button type="button" class="category-card" data-category="matcha" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!Eneo!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b6fe60-0bfa-4b45-8df9-462e2902af63_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">matcha</span>
+          </button>
+          <button type="button" class="category-card" data-category="tea" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!Iekd!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F061b9fa7-fbc5-4d47-849d-5c9d4067b837_3840x2010.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">tea</span>
+          </button>
+          <button type="button" class="category-card" data-category="refreshers" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!31Lh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb03fbc38-287e-42be-9d70-c613965ddd24_3607x1888.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">refreshers</span>
+          </button>
+          <button type="button" class="category-card" data-category="syrups" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!U47M!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26a46f29-046e-47aa-8a38-26e9d6cf7436_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">syrups</span>
+          </button>
+        </div>
+      </details>
     </section>
 
-    <section class="recipe-section" aria-labelledby="studio-heading">
-      <h2 id="studio-heading" class="recipe-group-title">the studio</h2>
-      <div class="category-grid">
-        <button type="button" class="category-card" data-category="butters" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!mr5W!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef51b828-7f47-4956-bcf5-15b8f0623176_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">butters</span>
-        </button>
-        <button type="button" class="category-card" data-category="extracts" aria-haspopup="dialog">
-          <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!es5S!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d7001a6-ca52-40c7-98e8-6f56f343dd0f_736x385.jpeg" alt="" width="800" height="500" loading="lazy">
-          <span class="category-card-title">extracts</span>
-        </button>
-      </div>
+    <section class="recipe-section">
+      <details class="recipe-group" open>
+        <summary id="studio-heading" class="recipe-group-title">the studio</summary>
+        <div class="category-grid">
+          <button type="button" class="category-card" data-category="butters" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!mr5W!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef51b828-7f47-4956-bcf5-15b8f0623176_3024x1583.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">butters</span>
+          </button>
+          <button type="button" class="category-card" data-category="extracts" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!es5S!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d7001a6-ca52-40c7-98e8-6f56f343dd0f_736x385.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">extracts</span>
+          </button>
+          <button type="button" class="category-card" data-category="ingredients" aria-haspopup="dialog">
+            <img class="category-card-media" src="https://substackcdn.com/image/fetch/$s_!NIXy!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aba2073-4b13-4b9b-ba80-516cc96b16d8_4284x2243.jpeg" alt="" width="800" height="500" loading="lazy">
+            <span class="category-card-title">ingredients</span>
+          </button>
+        </div>
+      </details>
     </section>
 
     </div>
@@ -688,6 +757,8 @@
         title: 'cookies',
         moreUrl: 'https://slowbatch.substack.com/t/cookies',
         recipes: [
+          { title: 'Coraline Button Shortbread Cookies', url: 'https://slowbatch.substack.com/p/coraline-button-shortbread-cookies', image: 'https://substackcdn.com/image/fetch/$s_!TJWv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ea47f32-7b8b-4e1e-8c94-2714e86c3ad6_3024x1583.jpeg', tags: ['cookies', 'bakery', 'shortbread'] },
+          { title: 'Soft Caramel Pretzel Chocolate Chip Cookies', url: 'https://slowbatch.substack.com/p/caramel-pretzel-cookies', image: 'https://substackcdn.com/image/fetch/$s_!vrAp!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5af9eaba-5db2-45ed-a894-f2bb385c6012_3024x3024.heic', tags: ['cookies', 'bakery', 'caramel', 'pretzel'] },
           { title: 'Lemon Crinkle Cookies', url: 'https://slowbatch.substack.com/p/lemon-crinkle-cookies', image: 'https://substackcdn.com/image/fetch/$s_!52U7!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78e0e29b-e17f-4d83-9b7a-f6dd6ef582ae_4284x2243.jpeg', tags: ['cookies', 'bakery', 'lemon'] },
           { title: 'Crisp Lemon Shortbread Cookies', url: 'https://slowbatch.substack.com/p/lemon-shortbread', image: 'https://substackcdn.com/image/fetch/$s_!R06p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfb3fc43-8820-47c5-8012-3c69c7dbbfea_3024x1583.jpeg', tags: ['cookies', 'bakery', 'lemon', 'shortbread'] },
           { title: 'Rose Powder Shortbread Hearts', url: 'https://slowbatch.substack.com/p/rose-shortbread', image: 'https://substackcdn.com/image/fetch/$s_!nrhZ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb6f0acca-8f88-40ab-a622-10e815e287b2_4284x2243.jpeg', tags: ['cookies', 'bakery', 'shortbread', 'rose'] },
@@ -706,6 +777,7 @@
         title: 'bars',
         moreUrl: 'https://slowbatch.substack.com/t/bars',
         recipes: [
+          { title: 'Blueberry Crumble Bars', url: 'https://slowbatch.substack.com/p/blueberry-crumble-bars', image: 'https://substackcdn.com/image/fetch/$s_!1mp1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b5142f8-9fab-4fb0-877c-9a172ca66d8c_1512x792.jpeg', tags: ['bars', 'bakery', 'blueberry'] },
           { title: 'Warm Apple Cinnamon Oatmeal Bars', url: 'https://slowbatch.substack.com/p/apple-cinnamon-oatmeal-bars', image: 'https://substackcdn.com/image/fetch/$s_!Bv7E!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5051f537-f5f0-475a-ad6d-6c6c65ea58c1_3293x2470.jpeg', tags: ['bars', 'bakery', 'apple', 'oatmeal'] },
           { title: 'Small-Batch Cranberry Crumble Bars', url: 'https://slowbatch.substack.com/p/jam-cookie-bars', image: 'https://substackcdn.com/image/fetch/$s_!Ppxl!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faedc1fa6-33bc-4c6d-b726-fd82ad766b33_4284x4224.jpeg', tags: ['bars', 'bakery', 'cranberry'] },
         ],
@@ -716,14 +788,31 @@
         recipes: [
           { title: 'Lime & Mint Mojito Puff Pastries', url: 'https://slowbatch.substack.com/p/mojito-puff-pastry', image: 'https://substackcdn.com/image/fetch/$s_!pVEv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05b11381-0ccb-4b59-98db-ee37efcf59f5_3024x1583.jpeg', tags: ['pastries', 'bakery', 'mojito'] },
           { title: 'Soft Apple Cinnamon Scones', url: 'https://slowbatch.substack.com/p/soft-apple-cinnamon-scones', image: 'https://substackcdn.com/image/fetch/$s_!4aiD!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8c82bccf-c7ad-4c61-8a59-aa32c598c775_3024x2268.jpeg', tags: ['pastries', 'bakery', 'scones', 'apple'] },
-          { title: 'Small-Batch Mini Lemon Loaves', url: 'https://slowbatch.substack.com/p/mini-lemon-loaves', image: 'https://substackcdn.com/image/fetch/$s_!qN2T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbda7f1b0-5a1c-464f-91da-15d0e680bc28_3024x1583.jpeg', tags: ['pastries', 'bakery', 'lemon', 'loaf'] },
-          { title: 'Small-Batch Banana Bread Pudding', url: 'https://slowbatch.substack.com/p/banana-bread-pudding', image: 'https://substackcdn.com/image/fetch/$s_!UGnm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06d0c738-b537-4e32-b10e-c2c146c960a8_3024x1583.jpeg', tags: ['pastries', 'bakery', 'banana', 'pudding'] },
+        ],
+      },
+      donuts: {
+        title: 'donuts',
+        moreUrl: 'https://slowbatch.substack.com/t/donuts',
+        recipes: [
+          { title: 'Baked Chocolate Glazed Donuts', url: 'https://slowbatch.substack.com/p/chocolate-glazed-donuts', image: 'https://substackcdn.com/image/fetch/$s_!p7hG!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3829c2e5-51d2-4f2c-b359-c1fa1ac527c2_3379x1769.jpeg', tags: ['donuts', 'bakery', 'chocolate'] },
+        ],
+      },
+      bread: {
+        title: 'bread',
+        moreUrl: 'https://slowbatch.substack.com/t/bread',
+        recipes: [
+          { title: 'Chicken Parm Pizza Focaccia', url: 'https://slowbatch.substack.com/p/chicken-parm-pizza-focaccia', image: 'https://substackcdn.com/image/fetch/$s_!pJiQ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F158e73b9-e9dd-4fee-8f58-e36f2eb42038_4144x2170.jpeg', tags: ['bread', 'bakery', 'focaccia'] },
+          { title: 'Cheesy Garlic Pesto Focaccia', url: 'https://slowbatch.substack.com/p/cheesy-garlic-pesto-focaccia', image: 'https://substackcdn.com/image/fetch/$s_!-YHN!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14690914-3896-477a-a02c-9c0d5aa45bb5_4032x2111.jpeg', tags: ['bread', 'bakery', 'focaccia'] },
+          { title: 'Small-Batch Banana Bread Pudding', url: 'https://slowbatch.substack.com/p/banana-bread-pudding', image: 'https://substackcdn.com/image/fetch/$s_!UGnm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06d0c738-b537-4e32-b10e-c2c146c960a8_3024x1583.jpeg', tags: ['bread', 'bakery', 'banana', 'pudding'] },
+          { title: 'Small-Batch Mini Lemon Loaves', url: 'https://slowbatch.substack.com/p/mini-lemon-loaves', image: 'https://substackcdn.com/image/fetch/$s_!qN2T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbda7f1b0-5a1c-464f-91da-15d0e680bc28_3024x1583.jpeg', tags: ['bread', 'bakery', 'lemon', 'loaf'] },
         ],
       },
       coffee: {
         title: 'coffee',
         moreUrl: 'https://slowbatch.substack.com/t/coffee',
         recipes: [
+          { title: 'Iced “Birthday Girl” Latte', url: 'https://slowbatch.substack.com/p/iced-birthday-girl-latte', image: 'https://substackcdn.com/image/fetch/$s_!UTES!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84a3e8d-11f8-453e-89e5-ae08a2b590cd_4284x2243.jpeg', tags: ['coffee', 'latte', 'café', 'cafe'] },
+          { title: 'Iced Blueberry Pancake Latte', url: 'https://slowbatch.substack.com/p/iced-blueberry-pancake-latte', image: 'https://substackcdn.com/image/fetch/$s_!JEkt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd62d86d4-73ae-4c9f-bbbd-df300aaa01ff_4284x2243.jpeg', tags: ['coffee', 'latte', 'café', 'cafe', 'blueberry', 'pancake'] },
           { title: 'Iced Banana Bread Latte', url: 'https://slowbatch.substack.com/p/iced-banana-bread-latte', image: 'https://substackcdn.com/image/fetch/$s_!vj6M!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30b88418-b3b2-45b0-8e4b-07fc2b682a3c_4284x2243.jpeg', tags: ['coffee', 'latte', 'café', 'cafe', 'banana'] },
           { title: 'Coconut & Chocolate Cold Brew (The Mounds Copycat)', url: 'https://slowbatch.substack.com/p/mounds-cold-brew', image: 'https://substackcdn.com/image/fetch/$s_!C9Ki!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5210ad39-5d56-4fc9-a86e-bac34e7430f1_4284x2243.jpeg', tags: ['coffee', 'cold brew', 'copycat', 'café', 'cafe'] },
           { title: 'Chocolate Covered Strawberry Cold Brew', url: 'https://slowbatch.substack.com/p/chocolate-covered-strawberry-cold-brew', image: 'https://substackcdn.com/image/fetch/$s_!zQLT!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff93511c2-968d-430e-994a-b8a635701e25_4284x2243.jpeg', tags: ['coffee', 'cold brew', 'café', 'cafe', 'strawberry'] },
@@ -733,16 +822,45 @@
         title: 'matcha',
         moreUrl: 'https://slowbatch.substack.com/t/matcha',
         recipes: [
+          { title: 'Iced Ube Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-ube-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!Eneo!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b6fe60-0bfa-4b45-8df9-462e2902af63_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'ube'] },
+          { title: 'Iced Pumpkin Pie Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-pumpkin-pie-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!rNj7!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F90b9e2e6-3cec-46b6-b595-e6b5d855915b_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'pumpkin'] },
+          { title: 'Iced Frankenstein Black Sesame Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-frankenstein-black-sesame-matcha', image: 'https://substackcdn.com/image/fetch/$s_!IySZ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4e8c2b98-e4f2-4a08-ac41-e01c35b5e617_3780x1979.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'sesame'] },
+          { title: 'Iced Maple Sea Salt Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-maple-sea-salt-matcha-latte-f4a', image: 'https://substackcdn.com/image/fetch/$s_!tRSY!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fddce0eb6-015c-4128-9d92-985bac1b9c6d_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'maple'] },
+          { title: 'Iced Apple Cider Donut Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-apple-cider-donut-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!y3WK!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff02131eb-d24c-4fa0-a0eb-1c1b6eb5b2a2_3894x2039.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'apple'] },
+          { title: 'Iced Bloody Honey Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-bloody-honey-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!zUnA!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c3c9427-4ca4-4a99-a51c-18ad3fc5acf7_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'honey'] },
+          { title: 'Iced Marshmallow Fluff Ghost Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-marshmallow-fluff-ghost-matcha', image: 'https://substackcdn.com/image/fetch/$s_!OqXO!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F555c4eb4-5f68-4246-8767-0205a93138cd_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'marshmallow'] },
+          { title: 'Iced Neapolitan Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-neapolitan-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!-5xQ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcab62cb-7f54-4536-997f-4202db8a1383_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'neapolitan'] },
           { title: 'Iced Strawbana Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-strawbana-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!JVKn!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b0ca8a4-a785-44ca-a7ed-5a2cd1bfc939_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'strawberry', 'banana'] },
           { title: 'Iced Chocolate Covered Pretzel Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-chocolate-covered-pretzel-matcha', image: 'https://substackcdn.com/image/fetch/$s_!5yy5!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e2c5f79-9c45-4e0e-8376-eaa683e64162_3711x1943.jpeg', tags: ['matcha', 'latte', 'café', 'cafe', 'pretzel'] },
           { title: 'Iced French Vanilla Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-french-vanilla-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!TsvM!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2a6fdeb5-77b1-4fe2-a37e-e68e6f40b9b3_4284x2243.jpeg', tags: ['matcha', 'latte', 'café', 'cafe'] },
           { title: 'Iced London Fog Matcha Latte', url: 'https://slowbatch.substack.com/p/iced-london-fog-matcha-latte', image: 'https://substackcdn.com/image/fetch/$s_!Kf2T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3beb3df4-564c-46a9-be67-66ce43afe98d_4284x2243.jpeg', tags: ['matcha', 'latte', 'earl grey', 'café', 'cafe'] },
         ],
       },
+      tea: {
+        title: 'tea',
+        moreUrl: 'https://slowbatch.substack.com/t/tea',
+        recipes: [
+          { title: 'Homemade Unsweetened Chai Concentrate', url: 'https://slowbatch.substack.com/p/homemade-unsweetened-chai-concentrate', image: 'https://substackcdn.com/image/fetch/$s_!Iekd!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F061b9fa7-fbc5-4d47-849d-5c9d4067b837_3840x2010.jpeg', tags: ['tea', 'chai', 'café', 'cafe'] },
+        ],
+      },
+      refreshers: {
+        title: 'refreshers',
+        moreUrl: 'https://slowbatch.substack.com/t/refreshers',
+        recipes: [
+          { title: 'Iced Apple Chaider', url: 'https://slowbatch.substack.com/p/iced-apple-chaider', image: 'https://substackcdn.com/image/fetch/$s_!31Lh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb03fbc38-287e-42be-9d70-c613965ddd24_3607x1888.jpeg', tags: ['refreshers', 'café', 'cafe', 'apple', 'chai'] },
+          { title: 'Lavenberry Lemonade', url: 'https://slowbatch.substack.com/p/lavenberry-lemonade', image: 'https://substackcdn.com/image/fetch/$s_!t_Oa!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7603013-c452-459d-a031-b00587af7960_4284x2243.jpeg', tags: ['refreshers', 'café', 'cafe', 'lavender', 'lemonade'] },
+        ],
+      },
       syrups: {
         title: 'syrups',
         moreUrl: 'https://slowbatch.substack.com/t/syrups',
         recipes: [
+          { title: 'Homemade Cinnamon Brown Sugar Simple Syrup', url: 'https://slowbatch.substack.com/p/homemade-cinnamon-brown-sugar-simple', image: 'https://substackcdn.com/image/fetch/$s_!U47M!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26a46f29-046e-47aa-8a38-26e9d6cf7436_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'cinnamon'] },
+          { title: 'Homemade Mocha Simple Syrup', url: 'https://slowbatch.substack.com/p/homemade-mocha-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!oTO3!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd766a55f-7a8c-4b31-a412-ade6420f3a52_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'mocha', 'chocolate'] },
+          { title: 'Fresh Pumpkin Simple Syrup', url: 'https://slowbatch.substack.com/p/5-minute-pumpkin-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!SvJh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faa34f32b-a023-43db-92d4-d18aa66ee4d7_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'pumpkin'] },
+          { title: 'Homemade Apple Simple Syrup', url: 'https://slowbatch.substack.com/p/homemade-apple-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!vTZJ!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7b125cc-a65b-4f62-a8b6-40dca93cc728_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'apple'] },
+          { title: '5-Minute Pumpkin Spice Simple Syrup', url: 'https://slowbatch.substack.com/p/pumpkin-spice-syrup', image: 'https://substackcdn.com/image/fetch/$s_!CmQn!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ff3ff39-82dc-4c77-aa7d-cd1beafb85e9_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'pumpkin'] },
+          { title: 'Homemade Blueberry Simple Syrup', url: 'https://slowbatch.substack.com/p/blueberry-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!goIG!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1f448685-29b9-4dab-903f-d46e2ee3ffdf_2944x1541.jpeg', tags: ['syrup', 'café', 'cafe', 'blueberry'] },
           { title: 'Strawberry Simple Syrup (using strawberry tops!)', url: 'https://slowbatch.substack.com/p/strawberry-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!Iznc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88ac1787-9fc0-4755-846d-495b1531efa1_4284x2243.jpeg', tags: ['syrup', 'strawberry', 'café', 'cafe', 'exclusive'] },
           { title: 'Homemade Hazelnut Simple Syrup', url: 'https://slowbatch.substack.com/p/hazelnut-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!awiB!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6535f730-1834-418f-8017-21fd7c593b43_1456x762.webp', tags: ['syrup', 'café', 'cafe', 'exclusive'] },
           { title: 'Homemade Earl Grey Simple Syrup', url: 'https://slowbatch.substack.com/p/earl-grey-simple-syrup', image: 'https://substackcdn.com/image/fetch/$s_!lofI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F28893e82-e5dd-4ac6-83b0-ee4e68a8815b_4284x2243.jpeg', tags: ['syrup', 'café', 'cafe', 'exclusive'] },
@@ -764,6 +882,13 @@
           { title: 'Homemade Grapefruit Extract', url: 'https://slowbatch.substack.com/p/grapefruit-extract', image: 'https://substackcdn.com/image/fetch/$s_!IJKH!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9a83ea67-0084-45ba-8a1a-2c4825b6f76b_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
           { title: 'Homemade Orange Extract', url: 'https://slowbatch.substack.com/p/orange-extract', image: 'https://substackcdn.com/image/fetch/$s_!etRk!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef17804a-1826-474c-a834-4548af400157_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
           { title: 'Homemade Vanilla Extract', url: 'https://slowbatch.substack.com/p/vanilla-extract', image: 'https://substackcdn.com/image/fetch/$s_!m14v!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4a1ab863-9c72-40be-9ca0-d86174f28348_736x385.jpeg', tags: ['extract', 'studio', 'exclusive'] },
+        ],
+      },
+      ingredients: {
+        title: 'ingredients',
+        moreUrl: 'https://slowbatch.substack.com/t/ingredients',
+        recipes: [
+          { title: 'Homemade Pumpkin Puree', url: 'https://slowbatch.substack.com/p/homemade-pumpkin-puree', image: 'https://substackcdn.com/image/fetch/$s_!NIXy!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aba2073-4b13-4b9b-ba80-516cc96b16d8_4284x2243.jpeg', tags: ['ingredients', 'studio', 'pumpkin'] },
         ],
       },
     };
